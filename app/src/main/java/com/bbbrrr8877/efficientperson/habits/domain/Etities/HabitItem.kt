@@ -1,4 +1,4 @@
-package com.bbbrrr8877.efficientperson.habits.domain
+package com.bbbrrr8877.efficientperson.habits.domain.Etities
 
 data class HabitItem(
     var id: Long = UNDEFINED_ID,
