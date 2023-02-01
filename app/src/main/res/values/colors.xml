@@ -15,4 +15,5 @@
     <color name="bad_habit_enabled_text_color">#C5C208</color>
     <color name="good_habit_disabled_text_color">#132EB5</color>
     <color name="bad_habit_disabled_text_color">#EDEB50</color>
+    <color name="habit_detail_text_color">#000000</color>
 </resources>

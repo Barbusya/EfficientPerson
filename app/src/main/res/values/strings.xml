@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Efficient Person</string>
     <string name="add_habit_content_description">Add new habit</string>
+    <string name="title_hint">Title:</string>
+    <string name="description_hint">Description:</string>
+    <string name="save_btn">Save</string>
+    <string name="error_input_title">Invalid title</string>
+    <string name="good_or_bad_habit">Good or Bad habit</string>
+    <string name="passed_or_not">Passed or not</string>
 </resources>

@@ -26,8 +26,8 @@ interface HabitListDao {
     @Query("DELETE FROM habit_items WHERE id=:habitItemId")
     suspend fun deleteHabitItem(habitItemId: Long)
 
-    @Query("DELETE FROM habit_items WHERE id=:habitItemId")
-    fun deleteShopItemSync(habitItemId: Long): Long
+//    @Query("DELETE FROM habit_items WHERE id=:habitItemId")
+//    fun deleteShopItemSync(habitItemId: Long): Long
 
     @Query("SELECT * FROM habit_items WHERE id=:habitItemId LIMIT 1")
     suspend fun getHabitItem(habitItemId: Long): HabitItemDBModel
