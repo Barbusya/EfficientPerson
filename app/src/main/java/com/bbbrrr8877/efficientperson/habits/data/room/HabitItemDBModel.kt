@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class HabitItemDBModel(
     @PrimaryKey(autoGenerate = true)
     val id: Long,
-    val name: String,
+    val title: String,
     val description: String,
     val quality: Boolean,
     val mark: Boolean,

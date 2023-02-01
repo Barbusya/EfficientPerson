@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/habitListFragment">
+
+    <fragment
+        android:id="@+id/habitListFragment"
+        android:name="com.bbbrrr8877.efficientperson.habits.presentation.HabitListFragment"
+        android:label="HabitListFragment" >
+        <action
+            android:id="@+id/action_habitListFragment_to_habitDetailsFragment"
+            app:destination="@id/habitDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/habitDetailsFragment"
+        android:name="com.bbbrrr8877.efficientperson.habits.presentation.HabitDetailsFragment"
+        android:label="HabitDetailsFragment" >
+        <action
+            android:id="@+id/action_habitDetailsFragment_to_habitListFragment"
+            app:destination="@id/habitListFragment" />
+    </fragment>
+</navigation>

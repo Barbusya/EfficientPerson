@@ -6,7 +6,7 @@ class HabitListMapper {
 
     fun mapEntityToDbModel(habitItem: HabitItem) = HabitItemDBModel(
         id = habitItem.id,
-        name = habitItem.name,
+        title = habitItem.title,
         description = habitItem.description,
         quality = habitItem.quality,
         mark = habitItem.mark,
@@ -14,7 +14,7 @@ class HabitListMapper {
 
     fun mapDbModelToEntity(habitItemDBModel: HabitItemDBModel) = HabitItem(
         id = habitItemDBModel.id,
-        name = habitItemDBModel.name,
+        title = habitItemDBModel.title,
         description = habitItemDBModel.description,
         quality = habitItemDBModel.quality,
         mark = habitItemDBModel.mark,

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Efficient Person</string>
+    <string name="add_habit_content_description">Add new habit</string>
 </resources>
