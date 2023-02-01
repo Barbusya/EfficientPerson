@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/good_habit_disabled_background"
+            android:background="@color/bad_habit_disabled_background"
             android:padding="16dp">
 
             <TextView
@@ -25,10 +25,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/good_habit_disabled_text_color"
+                android:textColor="@color/bad_habit_disabled_text_color"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Отжимания"
+                tools:text="Не курить!"
                 />
 
             <CheckBox
