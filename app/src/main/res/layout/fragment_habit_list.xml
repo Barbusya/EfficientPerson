@@ -17,7 +17,7 @@
         tools:listitem="@layout/item_habit_good_enabled" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_add_shop_item"
+        android:id="@+id/button_add_habit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

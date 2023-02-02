@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/habitListFragment"
-        android:name="com.bbbrrr8877.efficientperson.habits.presentation.HabitListFragment"
+        android:name="com.bbbrrr8877.efficientperson.habits.presentation.habitlist.HabitListFragment"
         android:label="HabitListFragment" >
         <action
             android:id="@+id/action_habitListFragment_to_habitDetailsFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/habitDetailsFragment"
-        android:name="com.bbbrrr8877.efficientperson.habits.presentation.HabitDetailsFragment"
+        android:name="com.bbbrrr8877.efficientperson.habits.presentation.habitdetails.HabitDetailsFragment"
         android:label="HabitDetailsFragment" >
         <action
             android:id="@+id/action_habitDetailsFragment_to_habitListFragment"
