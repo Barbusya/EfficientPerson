@@ -8,16 +8,16 @@ class HabitListMapper {
         id = habitItem.id,
         title = habitItem.title,
         description = habitItem.description,
-        quality = habitItem.quality,
-        mark = habitItem.mark,
+        isGood = habitItem.isGood,
+        isDone = habitItem.isDone,
     )
 
     fun mapDbModelToEntity(habitItemDBModel: HabitItemDBModel) = HabitItem(
         id = habitItemDBModel.id,
         title = habitItemDBModel.title,
         description = habitItemDBModel.description,
-        quality = habitItemDBModel.quality,
-        mark = habitItemDBModel.mark,
+        isGood = habitItemDBModel.isGood,
+        isDone = habitItemDBModel.isDone,
     )
 
     fun mapListDBModelToListEntity(list: List<HabitItemDBModel>) = list.map {

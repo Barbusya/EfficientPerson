@@ -12,9 +12,14 @@ import com.bbbrrr8877.efficientperson.databinding.FragmentHabitListBinding
 
 class HabitListFragment: Fragment(R.layout.fragment_habit_list) {
 
+    private lateinit var viewModel: HabitListViewModel
+    private lateinit var habitListAdapter: HabitListAdapter
+
     private var _binding: FragmentHabitListBinding? = null
     private val binding: FragmentHabitListBinding
         get() = _binding ?: throw RuntimeException("FragmentHabitListBinding == null")
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,5 +40,20 @@ class HabitListFragment: Fragment(R.layout.fragment_habit_list) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setupRecyclerView() {
+        val rvHabitList = binding.rvHabitList
+        with(rvHabitList) {
+            habitListAdapter = HabitListAdapter()
+            adapter = habitListAdapter
+        }
+        setupClickListener()
+    }
+
+    private fun setupClickListener() {
+        habitListAdapter.onItemClickListener = {
+            findNavController().navigate(R.id.action_habitListFragment_to_habitDetailsFragment)
+        }
     }
 }

@@ -9,6 +9,6 @@ data class HabitItemDBModel(
     val id: Long,
     val title: String,
     val description: String,
-    val quality: Boolean,
-    val mark: Boolean,
+    val isGood: Boolean,
+    val isDone: Boolean,
 )

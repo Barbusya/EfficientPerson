@@ -59,8 +59,8 @@
         app:layout_constraintTop_toBottomOf="@id/til_description"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <RadioButton
-        android:id="@+id/rb_good_or_bad"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sw_good_or_bad"
         style="@style/Widget.Material3.CompoundButton.RadioButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         style="@style/Widget.Material3.CompoundButton.CheckBox"
         tools:checked="false"
-        app:layout_constraintTop_toBottomOf="@id/rb_good_or_bad"
+        app:layout_constraintTop_toBottomOf="@id/sw_good_or_bad"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button

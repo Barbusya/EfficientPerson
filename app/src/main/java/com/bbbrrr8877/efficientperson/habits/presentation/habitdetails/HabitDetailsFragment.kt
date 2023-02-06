@@ -5,10 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitDetailsBinding
 
 class HabitDetailsFragment : Fragment() {
+
+    private val view: HabitDetailsViewModel by lazy {
+        ViewModelProvider(this)[HabitDetailsViewModel::class.java]
+    }
 
     private var _binding: FragmentHabitDetailsBinding? = null
     private val binding: FragmentHabitDetailsBinding
