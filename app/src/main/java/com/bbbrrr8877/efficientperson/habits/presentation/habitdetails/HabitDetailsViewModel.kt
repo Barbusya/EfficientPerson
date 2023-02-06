@@ -78,30 +78,30 @@ class HabitDetailsViewModel(
             }
         }
     }
-}
 
-private fun parseTitle(inputTitle: String?): String {
-    return inputTitle?.trim() ?: ""
-}
 
-private fun parseDescription(inputDescription: String?): String {
-    return inputDescription?.trim() ?: ""
-}
-
-private fun validateInput(title: String): Boolean {
-    var result = true
-    if (title.isBlank()) {
-        _errorInputTitle.value = true
-        result = false
+    private fun parseTitle(inputTitle: String?): String {
+        return inputTitle?.trim() ?: ""
     }
-    return result
-}
 
-fun resetErrorInputName() {
-    _errorInputTitle.value = false
-}
+    private fun parseDescription(inputDescription: String?): String {
+        return inputDescription?.trim() ?: ""
+    }
 
-private fun finishWork() {
-    _shouldCloseScreen.value = Unit
-}
+    private fun validateInput(title: String): Boolean {
+        var result = true
+        if (title.isBlank()) {
+            _errorInputTitle.value = true
+            result = false
+        }
+        return result
+    }
+
+    fun resetErrorInputName() {
+        _errorInputTitle.value = false
+    }
+
+    private fun finishWork() {
+        _shouldCloseScreen.value = Unit
+    }
 }
