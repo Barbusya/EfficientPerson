@@ -4,17 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.repositories.HabitRepository
+import kotlin.random.Random
 
-object  HabitRepositoryImpl: HabitRepository {
+object HabitRepositoryImpl : HabitRepository {
 
     private val habitListLD = MutableLiveData<List<HabitItem>>()
-    private val habitList = mutableListOf<HabitItem>()
+    private val habitList = sortedSetOf<HabitItem>({o1, o2 -> o1.id.compareTo(o2.id)})
 
     private var autoIncrement = 0L
 
     init {
-        for (i in 0 until 10) {
-            val item = HabitItem("Name $i")
+        for (i in 0 until 1000) {
+            val item = HabitItem(
+                "Name $i",
+                "",
+                Random.nextBoolean(),
+                Random.nextBoolean()
+            )
             addHabitItem(item)
         }
     }

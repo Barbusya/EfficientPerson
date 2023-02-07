@@ -9,15 +9,16 @@ import android.view.ViewParent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitDetailsBinding
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitListBinding
 
 class HabitListFragment: Fragment() {
 
-    private var count = 0
-
     private lateinit var viewModel: HabitListViewModel
+    private lateinit var adapter: HabitListAdapter
 
     private var _binding: FragmentHabitListBinding? = null
     private val binding: FragmentHabitListBinding
@@ -34,14 +35,10 @@ class HabitListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
         viewModel = ViewModelProvider(this)[HabitListViewModel::class.java]
         viewModel.habitList.observe(viewLifecycleOwner) {
-            Log.d("HabitListFragment", it.toString())
-            if(count == 0) {
-                count++
-                val item = it[0]
-                viewModel.changeDoneState(item)
-            }
+           adapter.habitList = it
         }
     }
 
@@ -49,5 +46,11 @@ class HabitListFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
-// 3 - 4
+
+    private fun setupRecyclerView() {
+        val rvHabitList = binding.rvHabitList
+        adapter = HabitListAdapter()
+        rvHabitList.adapter = adapter
+    }
+// 7 - 8
 }
