@@ -4,10 +4,10 @@ import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.repositories.HabitRepository
 
 class AddHabitItemUseCase(
-    private val habitRepository: HabitRepository
+    private val habitListRepository: HabitRepository
 ) {
 
-    suspend fun addHabitItem(habitItem: HabitItem) {
-        habitRepository.addHabitItem(habitItem)
+    fun addHabitItem(habitItem: HabitItem) {
+        habitListRepository.addHabitItem(habitItem)
     }
 }

@@ -1,30 +1,28 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.bbbrrr8877.efficientperson.habits.data.room.HabitRepositoryImpl
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.UseCases.DeleteHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.UseCases.EditHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.UseCases.GetHabitListUseCase
-import kotlinx.coroutines.launch
 
-class HabitListViewModel(
-    private val getHabitListUseCase: GetHabitListUseCase,
-    private val deleteHabitItemUseCase: DeleteHabitItemUseCase,
-    private val editHabitItemUseCase: EditHabitItemUseCase,
-): ViewModel() {
+class HabitListViewModel : ViewModel() {
+
+    private val repository = HabitRepositoryImpl
+
+    private val getHabitListUseCase = GetHabitListUseCase(repository)
+    private val deleteHabitListUseCase = DeleteHabitItemUseCase(repository)
+    private val editHabitListUseCase = EditHabitItemUseCase(repository)
 
     val habitList = getHabitListUseCase.getHabitList()
 
-    fun deleteHabitItem (habitItem: HabitItem) {
-        viewModelScope.launch {
-            deleteHabitItemUseCase.deleteHabitItem(habitItem)
-        }
+    fun deleteHabitItem(habitItem: HabitItem) {
+        deleteHabitListUseCase.deleteHabitItem(habitItem)
     }
 
-    fun editHabitItem(habitItem: HabitItem) {
-        viewModelScope.launch {
-            editHabitItemUseCase.editHabitItem(habitItem)
-        }
+    fun changeDoneState(habitItem: HabitItem) {
+        val newItem = habitItem.copy(isDone = !habitItem.isDone)
+        editHabitListUseCase.editHabitItem(newItem)
     }
 }

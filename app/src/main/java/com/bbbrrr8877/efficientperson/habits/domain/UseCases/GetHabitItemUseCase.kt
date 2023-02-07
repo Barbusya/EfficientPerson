@@ -7,7 +7,7 @@ class GetHabitItemUseCase(
     private val habitRepository: HabitRepository
 ) {
 
-    suspend fun getHabitItem(habitItemId: Long): HabitItem {
-         return habitRepository.getHabitItem(habitItemId)
+    fun getHabitItem(habitItemId: Long): HabitItem {
+        return habitRepository.getHabitItem(habitItemId)
     }
 }
