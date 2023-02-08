@@ -18,7 +18,7 @@ import com.bbbrrr8877.efficientperson.databinding.FragmentHabitListBinding
 class HabitListFragment: Fragment() {
 
     private lateinit var viewModel: HabitListViewModel
-    private lateinit var adapter: HabitListAdapter
+    private lateinit var habitListAdapter: HabitListAdapter
 
     private var _binding: FragmentHabitListBinding? = null
     private val binding: FragmentHabitListBinding
@@ -38,7 +38,7 @@ class HabitListFragment: Fragment() {
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[HabitListViewModel::class.java]
         viewModel.habitList.observe(viewLifecycleOwner) {
-           adapter.habitList = it
+            habitListAdapter.habitList = it
         }
     }
 
@@ -49,8 +49,26 @@ class HabitListFragment: Fragment() {
 
     private fun setupRecyclerView() {
         val rvHabitList = binding.rvHabitList
-        adapter = HabitListAdapter()
-        rvHabitList.adapter = adapter
+        with(rvHabitList) {
+            habitListAdapter = HabitListAdapter()
+            adapter = habitListAdapter
+            recycledViewPool.setMaxRecycledViews(
+                HabitListAdapter.VIEW_TYPE_GOOD_NOT_DONE,
+                HabitListAdapter.MAX_POOL_SIZE
+            )
+            recycledViewPool.setMaxRecycledViews(
+                HabitListAdapter.VIEW_TYPE_GOOD_DONE,
+                HabitListAdapter.MAX_POOL_SIZE
+            )
+            recycledViewPool.setMaxRecycledViews(
+                HabitListAdapter.VIEW_TYPE_BAD_NOT_DONE,
+                HabitListAdapter.MAX_POOL_SIZE
+            )
+            recycledViewPool.setMaxRecycledViews(
+                HabitListAdapter.VIEW_TYPE_BAD_DONE,
+                HabitListAdapter.MAX_POOL_SIZE
+            )
+        }
     }
-// 7 - 8
+//
 }

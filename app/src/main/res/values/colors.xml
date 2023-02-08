@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="good_habit_enabled_background">#A8E6A9</color>
-    <color name="bad_habit_enabled_background">#FD7171</color>
-    <color name="good_habit_disabled_background">#69F06C</color>
+    <color name="bad_habit_enabled_background">#FF9292</color>
+    <color name="good_habit_disabled_background">#54ED57</color>
     <color name="bad_habit_disabled_background">#FF0000</color>
     <color name="good_habit_enabled_text_color">#4461F1</color>
     <color name="bad_habit_enabled_text_color">#C5C208</color>
