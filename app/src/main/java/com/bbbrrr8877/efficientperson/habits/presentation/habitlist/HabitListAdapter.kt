@@ -1,20 +1,15 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 
-class HabitListAdapter : RecyclerView.Adapter<HabitItemViewHolder>() {
-
-    var habitList = listOf<HabitItem>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class HabitListAdapter : ListAdapter<HabitItem, HabitItemViewHolder>(HabitItemDiffCallback()) {
 
     var onHabitItemClickListener: ((HabitItem) -> Unit)? = null
 
@@ -30,10 +25,8 @@ class HabitListAdapter : RecyclerView.Adapter<HabitItemViewHolder>() {
         return HabitItemViewHolder(view)
     }
 
-    override fun getItemCount() = habitList.size
-
     override fun onBindViewHolder(viewHolder: HabitItemViewHolder, position: Int) {
-        val habitItem = habitList[position]
+        val habitItem = getItem(position)
         viewHolder.view.setOnClickListener {
             onHabitItemClickListener?.invoke(habitItem)
         }
@@ -41,20 +34,8 @@ class HabitListAdapter : RecyclerView.Adapter<HabitItemViewHolder>() {
         viewHolder.cbPassedOrNot.isChecked = habitItem.isDone
     }
 
-    override fun onViewRecycled(viewHolder: HabitItemViewHolder) {
-        super.onViewRecycled(viewHolder)
-        viewHolder.tvTitle.text = ""
-        viewHolder.cbPassedOrNot.isChecked = false
-        viewHolder.tvTitle.setTextColor(
-            ContextCompat.getColor(
-                viewHolder.view.context,
-                android.R.color.white
-            )
-        )
-    }
-
     override fun getItemViewType(position: Int): Int {
-        val item = habitList[position]
+        val item = getItem(position)
         return if (item.isGood && !item.isDone) {
             VIEW_TYPE_GOOD_NOT_DONE
         } else if (item.isGood && item.isDone) {

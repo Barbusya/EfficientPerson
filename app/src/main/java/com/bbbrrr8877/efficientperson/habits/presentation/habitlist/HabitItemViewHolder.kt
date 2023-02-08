@@ -7,6 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bbbrrr8877.efficientperson.R
 
 class HabitItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-    val tvTitle = view.findViewById<TextView>(R.id.tv_title)
-    val cbPassedOrNot = view.findViewById<CheckBox>(R.id.cb_passed_or_not)
+    val tvTitle: TextView = view.findViewById(R.id.tv_title)
+    val cbPassedOrNot: CheckBox = view.findViewById(R.id.cb_passed_or_not)
 }

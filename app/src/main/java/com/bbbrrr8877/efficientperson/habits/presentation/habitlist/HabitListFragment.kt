@@ -38,7 +38,7 @@ class HabitListFragment: Fragment() {
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[HabitListViewModel::class.java]
         viewModel.habitList.observe(viewLifecycleOwner) {
-            habitListAdapter.habitList = it
+            habitListAdapter.submitList(it)
         }
     }
 
