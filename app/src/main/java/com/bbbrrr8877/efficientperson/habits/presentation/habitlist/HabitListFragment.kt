@@ -69,6 +69,13 @@ class HabitListFragment: Fragment() {
                 HabitListAdapter.MAX_POOL_SIZE
             )
         }
+        setupClickListener()
     }
-//
+
+    private fun setupClickListener() {
+        habitListAdapter.onHabitItemClickListener = {
+            Log.d("HabitListFragment", it.toString())
+        }
+    }
+//9 - 10
 }

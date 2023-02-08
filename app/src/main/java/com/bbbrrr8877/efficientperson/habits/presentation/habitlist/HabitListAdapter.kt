@@ -10,15 +10,15 @@ import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 
 class HabitListAdapter : RecyclerView.Adapter<HabitItemViewHolder>() {
 
-    var count = 0
     var habitList = listOf<HabitItem>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
+    var onHabitItemClickListener: ((HabitItem) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitItemViewHolder {
-        Log.d("HabitListAdapter", "onCreateViewHolder, count: ${++count}")
         val layout = when (viewType) {
             VIEW_TYPE_GOOD_DONE -> R.layout.item_habit_bad_enabled
             VIEW_TYPE_GOOD_NOT_DONE -> R.layout.item_habit_good_disabled
@@ -35,7 +35,7 @@ class HabitListAdapter : RecyclerView.Adapter<HabitItemViewHolder>() {
     override fun onBindViewHolder(viewHolder: HabitItemViewHolder, position: Int) {
         val habitItem = habitList[position]
         viewHolder.view.setOnClickListener {
-            true
+            onHabitItemClickListener?.invoke(habitItem)
         }
         viewHolder.tvTitle.text = habitItem.title
         viewHolder.cbPassedOrNot.isChecked = habitItem.isDone
