@@ -1,4 +1,4 @@
-package com.bbbrrr8877.efficientperson.habits.domain.UseCases
+package com.bbbrrr8877.efficientperson.habits.domain.usecases
 
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.repositories.HabitRepository

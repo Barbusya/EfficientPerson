@@ -3,9 +3,9 @@ package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 import androidx.lifecycle.ViewModel
 import com.bbbrrr8877.efficientperson.habits.data.room.HabitRepositoryImpl
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
-import com.bbbrrr8877.efficientperson.habits.domain.UseCases.DeleteHabitItemUseCase
-import com.bbbrrr8877.efficientperson.habits.domain.UseCases.EditHabitItemUseCase
-import com.bbbrrr8877.efficientperson.habits.domain.UseCases.GetHabitListUseCase
+import com.bbbrrr8877.efficientperson.habits.domain.usecases.DeleteHabitItemUseCase
+import com.bbbrrr8877.efficientperson.habits.domain.usecases.EditHabitItemUseCase
+import com.bbbrrr8877.efficientperson.habits.domain.usecases.GetHabitListUseCase
 
 class HabitListViewModel : ViewModel() {
 

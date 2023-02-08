@@ -1,4 +1,4 @@
-package com.bbbrrr8877.efficientperson.habits.domain.UseCases
+package com.bbbrrr8877.efficientperson.habits.domain.usecases
 
 import androidx.lifecycle.LiveData
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
