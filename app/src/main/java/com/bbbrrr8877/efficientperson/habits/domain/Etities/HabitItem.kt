@@ -3,8 +3,8 @@ package com.bbbrrr8877.efficientperson.habits.domain.Etities
 data class HabitItem(
     val title: String,
     val description: String = "",
-    val isBad: Boolean = false,
-    val isDone: Boolean = false,
+    val isGood: Boolean,
+    val isDone: Boolean,
     var id: Long = UNDEFINED_ID,
 ) {
     companion object {

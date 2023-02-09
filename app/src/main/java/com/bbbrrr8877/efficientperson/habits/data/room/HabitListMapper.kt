@@ -8,7 +8,7 @@ class HabitListMapper {
         id = habitItem.id,
         title = habitItem.title,
         description = habitItem.description,
-        isGood = habitItem.isBad,
+        isGood = habitItem.isGood,
         isDone = habitItem.isDone,
     )
 
@@ -16,7 +16,7 @@ class HabitListMapper {
         id = habitItemDBModel.id,
         title = habitItemDBModel.title,
         description = habitItemDBModel.description,
-        isBad = habitItemDBModel.isGood,
+        isGood = habitItemDBModel.isGood,
         isDone = habitItemDBModel.isDone,
     )
 

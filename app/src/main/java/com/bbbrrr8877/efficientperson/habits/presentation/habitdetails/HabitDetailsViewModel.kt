@@ -44,7 +44,7 @@ class HabitDetailsViewModel : ViewModel() {
             val habitItem = HabitItem(
                 title = title,
                 description = description,
-                isBad = inputQuality,
+                isGood = inputQuality,
                 isDone = inputProgress
             )
             addHabitListUseCase.addHabitItem(habitItem)

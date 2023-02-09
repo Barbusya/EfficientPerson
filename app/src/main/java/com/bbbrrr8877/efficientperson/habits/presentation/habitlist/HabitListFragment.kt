@@ -1,6 +1,7 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,6 +81,7 @@ class HabitListFragment : Fragment() {
 
     private fun setupClickListener() {
         habitListAdapter.onHabitItemClickListener = {
+            Log.d("HabitListFragment", it.toString())
             launchEditHabitItemFragment(it.id)
         }
     }

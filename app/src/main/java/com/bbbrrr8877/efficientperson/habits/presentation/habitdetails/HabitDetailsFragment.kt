@@ -94,9 +94,9 @@ class HabitDetailsFragment : Fragment() {
                 etTitle.setText(it.title)
                 etDescription.setText(it.description)
                 cbPassedOrNot.isChecked = it.isDone
-                swGoodOrBad.visibility = View.GONE
+                swGoodOrBad.visibility = View.INVISIBLE
                 tvGoodOrBad.setText(
-                    if (it.isBad) {
+                    if (it.isGood) {
                         R.string.good_habit
                     } else {
                         R.string.bad_habit

@@ -12,7 +12,7 @@ class HabitListAdapter : ListAdapter<HabitItem, HabitItemViewHolder>(HabitItemDi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitItemViewHolder {
         val layout = when (viewType) {
-            VIEW_TYPE_GOOD_DONE -> R.layout.item_habit_bad_enabled
+            VIEW_TYPE_GOOD_DONE -> R.layout.item_habit_good_enabled
             VIEW_TYPE_GOOD_NOT_DONE -> R.layout.item_habit_good_disabled
             VIEW_TYPE_BAD_DONE -> R.layout.item_habit_bad_enabled
             VIEW_TYPE_BAD_NOT_DONE -> R.layout.item_habit_bad_disabled
@@ -33,11 +33,11 @@ class HabitListAdapter : ListAdapter<HabitItem, HabitItemViewHolder>(HabitItemDi
 
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)
-        return if (item.isBad && !item.isDone) {
+        return if (item.isGood && !item.isDone) {
             VIEW_TYPE_GOOD_NOT_DONE
-        } else if (item.isBad && item.isDone) {
+        } else if (item.isGood && item.isDone) {
             VIEW_TYPE_GOOD_DONE
-        } else if (!item.isBad && !item.isDone) {
+        } else if (!item.isGood && !item.isDone) {
             VIEW_TYPE_BAD_NOT_DONE
         } else {
             VIEW_TYPE_BAD_DONE

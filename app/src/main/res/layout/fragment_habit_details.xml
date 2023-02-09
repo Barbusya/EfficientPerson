@@ -5,6 +5,7 @@
     android:id="@+id/habit_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@color/good_habit_disabled_background"
     tools:context=".habits.presentation.habitdetails.HabitDetailsFragment">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -56,7 +57,7 @@
         android:layout_marginBottom="4dp"
         android:textSize="24sp"
         android:textColor="@color/habit_detail_text_color"
-        android:text="@string/good_or_bad_habit"
+        tools:text="@string/good_habit"
         app:layout_constraintTop_toBottomOf="@id/tv_passed_or_not"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -65,9 +66,9 @@
         style="@style/Widget.Material3.CompoundButton.Switch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:checked="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cb_passed_or_not"/>
+        app:layout_constraintTop_toBottomOf="@id/cb_passed_or_not"
+        android:checked="true" />
 
     <TextView
         android:id="@+id/tv_passed_or_not"
@@ -78,7 +79,7 @@
         android:layout_marginBottom="4dp"
         android:textSize="24sp"
         android:textColor="@color/habit_detail_text_color"
-        android:text="@string/passed_or_not"
+        tools:text="@string/not_passed"
         app:layout_constraintTop_toBottomOf="@id/til_description"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -87,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.Material3.CompoundButton.CheckBox"
-        tools:checked="false"
+        android:checked="false"
         app:layout_constraintTop_toBottomOf="@id/til_description"
         app:layout_constraintEnd_toEndOf="parent"/>
 
