@@ -2,6 +2,7 @@ package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.recyclerview.widget.ListAdapter
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
@@ -9,6 +10,7 @@ import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 class HabitListAdapter : ListAdapter<HabitItem, HabitItemViewHolder>(HabitItemDiffCallback()) {
 
     var onHabitItemClickListener: ((HabitItem) -> Unit)? = null
+    var onCheckBoxItemClickListener: ((HabitItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitItemViewHolder {
         val layout = when (viewType) {
@@ -29,6 +31,9 @@ class HabitListAdapter : ListAdapter<HabitItem, HabitItemViewHolder>(HabitItemDi
         }
         viewHolder.tvTitle.text = habitItem.title
         viewHolder.cbPassedOrNot.isChecked = habitItem.isDone
+        viewHolder.cbPassedOrNot.setOnClickListener {
+            onCheckBoxItemClickListener?.invoke(habitItem)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {

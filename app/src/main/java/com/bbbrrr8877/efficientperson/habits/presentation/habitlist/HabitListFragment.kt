@@ -1,7 +1,6 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,19 +76,23 @@ class HabitListFragment : Fragment() {
             )
         }
         setupClickListener()
+        setCheckBoxClickListener()
     }
 
     private fun setupClickListener() {
         habitListAdapter.onHabitItemClickListener = {
-            Log.d("HabitListFragment", it.toString())
             launchEditHabitItemFragment(it.id)
         }
     }
 
-    private fun launchEditHabitItemFragment(habitItemId: Long) {
-        habitListAdapter.onHabitItemClickListener = {
-            launchFragment(HabitDetailsFragment.newInstanceEditItem(it.id))
+    private fun setCheckBoxClickListener() {
+        habitListAdapter.onCheckBoxItemClickListener = {
+            viewModel.changeDoneState(it)
         }
+    }
+
+    private fun launchEditHabitItemFragment(habitItemId: Long) {
+        launchFragment(HabitDetailsFragment.newInstanceEditItem(habitItemId))
     }
 
     private fun launchAddHabitItemFragment() {
