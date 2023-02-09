@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="good_habit_enabled_background">#A8E6A9</color>
+    <color name="bad_habit_enabled_background">#FF9292</color>
+    <color name="good_habit_disabled_background">#54ED57</color>
+    <color name="bad_habit_disabled_background">#FF0000</color>
+    <color name="good_habit_enabled_text_color">#4461F1</color>
+    <color name="bad_habit_enabled_text_color">#C5C208</color>
+    <color name="good_habit_disabled_text_color">#132EB5</color>
+    <color name="bad_habit_disabled_text_color">#EDEB50</color>
+    <color name="habit_detail_text_color">#000000</color>
+    <color name="good_bg_color">#A8E6A9</color>
+    <color name="bad_bg_color">#FD7171</color>
 </resources>
