@@ -1,21 +1,16 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bbbrrr8877.efficientperson.R
-import com.bbbrrr8877.efficientperson.databinding.FragmentHabitDetailsBinding
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitListBinding
+import com.bbbrrr8877.efficientperson.habits.presentation.habitdetails.HabitDetailsFragment
 
-class HabitListFragment: Fragment() {
+class HabitListFragment : Fragment() {
 
     private lateinit var viewModel: HabitListViewModel
     private lateinit var habitListAdapter: HabitListAdapter
@@ -32,6 +27,7 @@ class HabitListFragment: Fragment() {
         _binding = FragmentHabitListBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,11 +36,21 @@ class HabitListFragment: Fragment() {
         viewModel.habitList.observe(viewLifecycleOwner) {
             habitListAdapter.submitList(it)
         }
+        binding.buttonAddHabit.setOnClickListener {
+            launchAddHabitItemFragment()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun launchFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun setupRecyclerView() {
@@ -74,8 +80,17 @@ class HabitListFragment: Fragment() {
 
     private fun setupClickListener() {
         habitListAdapter.onHabitItemClickListener = {
-            Log.d("HabitListFragment", it.toString())
+            launchEditHabitItemFragment(it.id)
         }
     }
-//12 - 13
+
+    private fun launchEditHabitItemFragment(habitItemId: Long) {
+        habitListAdapter.onHabitItemClickListener = {
+            launchFragment(HabitDetailsFragment.newInstanceEditItem(it.id))
+        }
+    }
+
+    private fun launchAddHabitItemFragment() {
+        launchFragment(HabitDetailsFragment.newInstanceAddItem())
+    }
 }

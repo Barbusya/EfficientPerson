@@ -2,10 +2,7 @@ package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 
@@ -36,11 +33,11 @@ class HabitListAdapter : ListAdapter<HabitItem, HabitItemViewHolder>(HabitItemDi
 
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)
-        return if (item.isGood && !item.isDone) {
+        return if (item.isBad && !item.isDone) {
             VIEW_TYPE_GOOD_NOT_DONE
-        } else if (item.isGood && item.isDone) {
+        } else if (item.isBad && item.isDone) {
             VIEW_TYPE_GOOD_DONE
-        } else if (!item.isGood && !item.isDone) {
+        } else if (!item.isBad && !item.isDone) {
             VIEW_TYPE_BAD_NOT_DONE
         } else {
             VIEW_TYPE_BAD_DONE

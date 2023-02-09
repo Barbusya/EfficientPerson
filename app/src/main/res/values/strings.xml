@@ -6,5 +6,9 @@
     <string name="save_btn">Save</string>
     <string name="error_input_title">Invalid title</string>
     <string name="good_or_bad_habit">Good or Bad habit</string>
+    <string name="good_habit">Good habit</string>
+    <string name="bad_habit">Bad habit</string>
     <string name="passed_or_not">Passed or not</string>
+    <string name="passed">Passed</string>
+    <string name="not_passed">Not passed</string>
 </resources>

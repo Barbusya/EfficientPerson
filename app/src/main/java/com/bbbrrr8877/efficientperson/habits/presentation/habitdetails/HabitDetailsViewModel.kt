@@ -23,10 +23,6 @@ class HabitDetailsViewModel : ViewModel() {
     private val _habitItem = MutableLiveData<HabitItem>()
     val habitItem: LiveData<HabitItem> = _habitItem
 
-    private val _shouldCloseScreen = MutableLiveData<Unit>()
-    val shouldCloseScreen: LiveData<Unit>
-        get() = _shouldCloseScreen
-
     fun getHabitItem(habitItemId: Long) {
         val item = getHabitItemUseCase.getHabitItem(habitItemId)
         _habitItem.value = item
@@ -45,7 +41,7 @@ class HabitDetailsViewModel : ViewModel() {
             val habitItem = HabitItem(
                 title = title,
                 description = description,
-                isGood = inputQuality,
+                isBad = inputQuality,
                 isDone = inputProgress
             )
             addHabitListUseCase.addHabitItem(habitItem)
@@ -86,17 +82,17 @@ class HabitDetailsViewModel : ViewModel() {
     private fun validateInput(title: String): Boolean {
         var result = true
         if (title.isBlank()) {
-                _errorInputTitle.value = true
+            _errorInputTitle.value = true
             result = false
         }
         return result
     }
 
-    private fun resetErrorInputTitle() {
+    fun resetErrorInputTitle() {
         _errorInputTitle.value = false
     }
 
     private fun finishWork() {
-        _shouldCloseScreen.value = Unit
+
     }
 }

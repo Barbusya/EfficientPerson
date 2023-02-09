@@ -57,17 +57,17 @@
         android:textSize="24sp"
         android:textColor="@color/habit_detail_text_color"
         android:text="@string/good_or_bad_habit"
-        app:layout_constraintTop_toBottomOf="@id/til_description"
+        app:layout_constraintTop_toBottomOf="@id/tv_passed_or_not"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/sw_good_or_bad"
-        style="@style/Widget.Material3.CompoundButton.RadioButton"
+        style="@style/Widget.Material3.CompoundButton.Switch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:checked="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_description"/>
+        app:layout_constraintTop_toBottomOf="@id/cb_passed_or_not"/>
 
     <TextView
         android:id="@+id/tv_passed_or_not"
@@ -79,7 +79,7 @@
         android:textSize="24sp"
         android:textColor="@color/habit_detail_text_color"
         android:text="@string/passed_or_not"
-        app:layout_constraintTop_toBottomOf="@id/tv_good_or_bad"
+        app:layout_constraintTop_toBottomOf="@id/til_description"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <CheckBox
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         style="@style/Widget.Material3.CompoundButton.CheckBox"
         tools:checked="false"
-        app:layout_constraintTop_toBottomOf="@id/sw_good_or_bad"
+        app:layout_constraintTop_toBottomOf="@id/til_description"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
