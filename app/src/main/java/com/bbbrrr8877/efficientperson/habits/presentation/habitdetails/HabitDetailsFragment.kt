@@ -61,6 +61,9 @@ class HabitDetailsFragment : Fragment() {
             }
             binding.tilTitle.error = message
         }
+        viewModel.shouldCloseScreen.observe(viewLifecycleOwner) {
+            backToList()
+        }
     }
 
     private fun launchRightMode() {
@@ -145,6 +148,10 @@ class HabitDetailsFragment : Fragment() {
             }
             habitItemId = args.getLong(HABIT_ITEM_ID, HabitItem.UNDEFINED_ID)
         }
+    }
+
+    private fun backToList() {
+        requireActivity().supportFragmentManager.popBackStack()
     }
 
     companion object {

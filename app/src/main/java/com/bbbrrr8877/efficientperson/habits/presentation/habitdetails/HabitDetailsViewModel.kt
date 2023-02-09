@@ -23,6 +23,9 @@ class HabitDetailsViewModel : ViewModel() {
     private val _habitItem = MutableLiveData<HabitItem>()
     val habitItem: LiveData<HabitItem> = _habitItem
 
+    private val _shouldCloseScreen = MutableLiveData<Unit>()
+    val shouldCloseScreen: LiveData<Unit> = _shouldCloseScreen
+
     fun getHabitItem(habitItemId: Long) {
         val item = getHabitItemUseCase.getHabitItem(habitItemId)
         _habitItem.value = item
@@ -93,6 +96,6 @@ class HabitDetailsViewModel : ViewModel() {
     }
 
     private fun finishWork() {
-
+        _shouldCloseScreen.value = Unit
     }
 }
