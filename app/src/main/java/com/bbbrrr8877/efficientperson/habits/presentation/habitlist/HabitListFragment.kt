@@ -46,9 +46,18 @@ class HabitListFragment : Fragment() {
         _binding = null
     }
 
+    private fun isOnePaneMode(orientation: Boolean): Int {
+        return if (orientation) {
+            R.id.main_container
+        } else {
+            R.id.land_fragment_container
+        }
+    }
+
     private fun launchFragment(fragment: Fragment) {
+        val layout = isOnePaneMode(binding.landFragmentContainer == null)
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, fragment)
+            .replace(layout, fragment)
             .addToBackStack(null)
             .commit()
     }

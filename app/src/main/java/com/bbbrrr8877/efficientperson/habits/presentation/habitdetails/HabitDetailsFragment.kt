@@ -95,6 +95,13 @@ class HabitDetailsFragment : Fragment() {
                 etTitle.setText(it.title)
                 etDescription.setText(it.description)
                 cbPassedOrNot.isChecked = it.isDone
+                cbPassedOrNot.setOnClickListener {
+                    if (binding.cbPassedOrNot.isChecked) {
+                        binding.tvPassedOrNot.setText(R.string.passed)
+                    } else {
+                        binding.tvPassedOrNot.setText(R.string.not_passed)
+                    }
+                }
                 swGoodOrBad.visibility = View.INVISIBLE
                 if (it.isGood) {
                     tvGoodOrBad.setText(R.string.good_habit)
@@ -124,32 +131,36 @@ class HabitDetailsFragment : Fragment() {
     }
 
     private fun launchAddMode() {
-        binding.cbPassedOrNot.setOnClickListener {
-            if (binding.cbPassedOrNot.isChecked) {
-                binding.tvPassedOrNot.setText(R.string.passed)
-            } else {
-                binding.tvPassedOrNot.setText(R.string.not_passed)
+        with(binding) {
+            cbPassedOrNot.visibility = View.INVISIBLE
+            cbPassedOrNot.setOnClickListener {
+                if (binding.cbPassedOrNot.isChecked) {
+                    binding.tvPassedOrNot.setText(R.string.passed)
+                } else {
+                    binding.tvPassedOrNot.setText(R.string.not_passed)
+                }
+            }
+            swGoodOrBad.setOnClickListener {
+                if (binding.swGoodOrBad.isChecked) {
+                    binding.tvGoodOrBad.setText(R.string.good_habit)
+                    binding.habitDetails.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.good_bg_color
+                        )
+                    )
+                } else {
+                    binding.tvGoodOrBad.setText(R.string.bad_habit)
+                    binding.habitDetails.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.bad_bg_color
+                        )
+                    )
+                }
             }
         }
-        binding.swGoodOrBad.setOnClickListener {
-            if (binding.swGoodOrBad.isChecked) {
-                binding.tvGoodOrBad.setText(R.string.good_habit)
-                binding.habitDetails.setBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.good_bg_color
-                    )
-                )
-            } else {
-                binding.tvGoodOrBad.setText(R.string.bad_habit)
-                binding.habitDetails.setBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.bad_bg_color
-                    )
-                )
-            }
-        }
+
         binding.saveButton.setOnClickListener {
             viewModel.addHabitItem(
                 binding.etTitle.text?.toString(),
