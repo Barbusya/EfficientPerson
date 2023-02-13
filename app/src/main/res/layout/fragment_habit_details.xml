@@ -5,7 +5,7 @@
     android:id="@+id/habit_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/good_habit_disabled_background"
+    android:background="@color/good_bg_color"
     tools:context=".habits.presentation.habitdetails.HabitDetailsFragment">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,7 +57,7 @@
         android:layout_marginBottom="4dp"
         android:textSize="24sp"
         android:textColor="@color/habit_detail_text_color"
-        tools:text="@string/good_habit"
+        android:text="@string/good_habit"
         app:layout_constraintTop_toBottomOf="@id/tv_passed_or_not"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -79,7 +79,7 @@
         android:layout_marginBottom="4dp"
         android:textSize="24sp"
         android:textColor="@color/habit_detail_text_color"
-        tools:text="@string/not_passed"
+        android:text="@string/not_passed"
         app:layout_constraintTop_toBottomOf="@id/til_description"
         app:layout_constraintStart_toStartOf="parent"/>
 

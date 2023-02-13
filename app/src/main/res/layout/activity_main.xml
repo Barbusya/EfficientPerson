@@ -5,4 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:name="com.bbbrrr8877.efficientperson.habits.presentation.habitlist.HabitListFragment"
-    tools:context=".MainActivity" />
+    tools:layout="@layout/fragment_habit_list" />

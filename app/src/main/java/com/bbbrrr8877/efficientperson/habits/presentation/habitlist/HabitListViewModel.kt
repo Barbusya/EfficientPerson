@@ -1,28 +1,32 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import androidx.lifecycle.ViewModel
-import com.bbbrrr8877.efficientperson.habits.data.room.HabitRepositoryImpl
+import androidx.lifecycle.viewModelScope
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.DeleteHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.EditHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.GetHabitListUseCase
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HabitListViewModel : ViewModel() {
-
-    private val repository = HabitRepositoryImpl
-
-    private val getHabitListUseCase = GetHabitListUseCase(repository)
-    private val deleteHabitListUseCase = DeleteHabitItemUseCase(repository)
-    private val editHabitListUseCase = EditHabitItemUseCase(repository)
+class HabitListViewModel @Inject constructor(
+    private val getHabitListUseCase: GetHabitListUseCase,
+    private val deleteHabitListUseCase: DeleteHabitItemUseCase,
+    private val editHabitListUseCase: EditHabitItemUseCase,
+) : ViewModel() {
 
     val habitList = getHabitListUseCase.getHabitList()
 
     fun deleteHabitItem(habitItem: HabitItem) {
-        deleteHabitListUseCase.deleteHabitItem(habitItem)
+        viewModelScope.launch {
+            deleteHabitListUseCase.deleteHabitItem(habitItem)
+        }
     }
 
     fun changeDoneState(habitItem: HabitItem) {
-        val newItem = habitItem.copy(isDone = !habitItem.isDone)
-        editHabitListUseCase.editHabitItem(newItem)
+        viewModelScope.launch {
+            val newItem = habitItem.copy(isDone = !habitItem.isDone)
+            editHabitListUseCase.editHabitItem(newItem)
+        }
     }
 }
