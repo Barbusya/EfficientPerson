@@ -7,7 +7,7 @@ class EditHabitItemUseCase(
     private val habitRepository: HabitRepository
 ) {
 
-    fun editHabitItem(habitItem: HabitItem) {
+    suspend fun editHabitItem(habitItem: HabitItem) {
         habitRepository.editHabitItem(habitItem)
     }
 }

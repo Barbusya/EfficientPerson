@@ -7,7 +7,7 @@ class DeleteHabitItemUseCase(
     private val habitRepository: HabitRepository
 ) {
 
-    fun deleteHabitItem(habitItem: HabitItem) {
+    suspend fun deleteHabitItem(habitItem: HabitItem) {
         habitRepository.deleteHabitItem(habitItem)
     }
 }

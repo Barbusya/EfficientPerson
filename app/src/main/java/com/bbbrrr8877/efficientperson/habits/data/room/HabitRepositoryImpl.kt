@@ -1,59 +1,38 @@
 package com.bbbrrr8877.efficientperson.habits.data.room
 
+import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.repositories.HabitRepository
-import kotlin.random.Random
 
-object HabitRepositoryImpl : HabitRepository {
+class HabitRepositoryImpl(
+    application: Application
+) : HabitRepository {
 
-    private val habitListLD = MutableLiveData<List<HabitItem>>()
-    private val habitList = sortedSetOf<HabitItem>({o1, o2 -> o1.id.compareTo(o2.id)})
+    private val habitListDao = HabitDatabase.getInstance(application).habitListDao()
+    private val mapper = HabitListMapper()
 
-    private var autoIncrement = 0L
-
-    init {
-        for (i in 0 until 10) {
-            val item = HabitItem(
-                "Name $i",
-                "",
-                Random.nextBoolean(),
-                Random.nextBoolean()
-            )
-            addHabitItem(item)
-        }
+    override suspend fun addHabitItem(habitItem: HabitItem) {
+        habitListDao.addHabitItem(mapper.mapEntityToDbModel(habitItem))
     }
 
-    override fun addHabitItem(habitItem: HabitItem) {
-        if (habitItem.id == HabitItem.UNDEFINED_ID) {
-            habitItem.id = autoIncrement++
-        }
-        habitList.add(habitItem)
-        updateList()
+    override suspend fun deleteHabitItem(habitItem: HabitItem) {
+        habitListDao.deleteHabitItem(habitItem.id)
     }
 
-    override fun deleteHabitItem(habitItem: HabitItem) {
-        habitList.remove(habitItem)
+    override suspend fun editHabitItem(habitItem: HabitItem) {
+        habitListDao.addHabitItem(mapper.mapEntityToDbModel(habitItem))
     }
 
-    override fun editHabitItem(habitItem: HabitItem) {
-        val oldElement = getHabitItem(habitItem.id)
-        habitList.remove(oldElement)
-        addHabitItem(habitItem)
+    override suspend fun getHabitItem(habitItemId: Long): HabitItem {
+        val dbModel = habitListDao.getHabitItem(habitItemId)
+        return mapper.mapDbModelToEntity(dbModel)
     }
 
-    override fun getHabitItem(habitItemId: Long): HabitItem {
-        return habitList.find {
-            it.id == habitItemId
-        } ?: throw RuntimeException("Element with id $habitItemId not found")
-    }
-
-    override fun getHabitList(): LiveData<List<HabitItem>> {
-        return habitListLD
-    }
-
-    private fun updateList() {
-        habitListLD.value = habitList.toList()
+    override fun getHabitList(): LiveData<List<HabitItem>> = Transformations.map(
+        habitListDao.getHabitList()
+    ) {
+        mapper.mapListDBModelToListEntity(it)
     }
 }

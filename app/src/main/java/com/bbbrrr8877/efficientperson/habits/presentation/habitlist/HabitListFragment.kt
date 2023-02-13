@@ -56,6 +56,7 @@ class HabitListFragment : Fragment() {
 
     private fun launchFragment(fragment: Fragment) {
         val layout = isOnePaneMode(binding.landFragmentContainer == null)
+        requireActivity().supportFragmentManager.popBackStack()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(layout, fragment)
             .addToBackStack(null)

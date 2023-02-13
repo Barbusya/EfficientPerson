@@ -1,17 +1,20 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitdetails
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.bbbrrr8877.efficientperson.habits.data.room.HabitRepositoryImpl
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.AddHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.EditHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.GetHabitItemUseCase
+import kotlinx.coroutines.launch
 
-class HabitDetailsViewModel : ViewModel() {
+class HabitDetailsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = HabitRepositoryImpl
+    private val repository = HabitRepositoryImpl(application)
 
     private val getHabitItemUseCase = GetHabitItemUseCase(repository)
     private val addHabitListUseCase = AddHabitItemUseCase(repository)
@@ -27,8 +30,10 @@ class HabitDetailsViewModel : ViewModel() {
     val shouldCloseScreen: LiveData<Unit> = _shouldCloseScreen
 
     fun getHabitItem(habitItemId: Long) {
-        val item = getHabitItemUseCase.getHabitItem(habitItemId)
-        _habitItem.value = item
+        viewModelScope.launch {
+            val item = getHabitItemUseCase.getHabitItem(habitItemId)
+            _habitItem.value = item
+        }
     }
 
     fun addHabitItem(
@@ -41,14 +46,16 @@ class HabitDetailsViewModel : ViewModel() {
         val description = parseDescription(inputDescription)
         val fieldValid = validateInput(title)
         if (fieldValid) {
-            val habitItem = HabitItem(
-                title = title,
-                description = description,
-                isGood = inputQuality,
-                isDone = inputProgress
-            )
-            addHabitListUseCase.addHabitItem(habitItem)
-            finishWork()
+            viewModelScope.launch {
+                val habitItem = HabitItem(
+                    title = title,
+                    description = description,
+                    isGood = inputQuality,
+                    isDone = inputProgress
+                )
+                addHabitListUseCase.addHabitItem(habitItem)
+                finishWork()
+            }
         }
     }
 
@@ -62,13 +69,15 @@ class HabitDetailsViewModel : ViewModel() {
         val fieldValid = validateInput(title)
         if (fieldValid) {
             _habitItem.value?.let {
-                val item = it.copy(
-                    title = title,
-                    description = description,
-                    isDone = inputProgress
-                )
-                editHabitListUseCase.editHabitItem(item)
-                finishWork()
+                viewModelScope.launch {
+                    val item = it.copy(
+                        title = title,
+                        description = description,
+                        isDone = inputProgress
+                    )
+                    editHabitListUseCase.editHabitItem(item)
+                    finishWork()
+                }
             }
         }
     }

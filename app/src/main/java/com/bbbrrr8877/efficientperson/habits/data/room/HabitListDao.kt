@@ -14,14 +14,14 @@ interface HabitListDao {
     @Query("SELECT * FROM habit_items")
     fun getHabitList(): LiveData<List<HabitItemDBModel>>
 
-    @Query("SELECT * FROM habit_items")
-    fun getHabitListCursor(): Cursor
+//    @Query("SELECT * FROM habit_items")
+//    fun getHabitListCursor(): Cursor
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addHabitItem(habitItemDBModel: HabitItemDBModel)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addHabitItemSync(habitItemDBModel: HabitItemDBModel)
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun addHabitItemSync(habitItemDBModel: HabitItemDBModel)
 
     @Query("DELETE FROM habit_items WHERE id=:habitItemId")
     suspend fun deleteHabitItem(habitItemId: Long)
