@@ -1,23 +1,42 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bbbrrr8877.efficientperson.App
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitListBinding
+import com.bbbrrr8877.efficientperson.habits.presentation.ViewModelFactory
 import com.bbbrrr8877.efficientperson.habits.presentation.habitdetails.HabitDetailsFragment
+import javax.inject.Inject
 
 class HabitListFragment : Fragment() {
 
-    private lateinit var viewModel: HabitListViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     private lateinit var habitListAdapter: HabitListAdapter
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[HabitListViewModel::class.java]
+    }
+
+    private val component by lazy {
+        (requireActivity().application as App).component
+    }
 
     private var _binding: FragmentHabitListBinding? = null
     private val binding: FragmentHabitListBinding
         get() = _binding ?: throw RuntimeException("FragmentHabitListBinding == null")
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +51,6 @@ class HabitListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        viewModel = ViewModelProvider(this)[HabitListViewModel::class.java]
         viewModel.habitList.observe(viewLifecycleOwner) {
             habitListAdapter.submitList(it)
         }

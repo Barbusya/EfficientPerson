@@ -1,8 +1,9 @@
 package com.bbbrrr8877.efficientperson.habits.data.room
 
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
+import javax.inject.Inject
 
-class HabitListMapper {
+class HabitListMapper @Inject constructor() {
 
     fun mapEntityToDbModel(habitItem: HabitItem) = HabitItemDBModel(
         id = habitItem.id,

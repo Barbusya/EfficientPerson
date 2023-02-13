@@ -1,24 +1,22 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitdetails
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bbbrrr8877.efficientperson.habits.data.room.HabitRepositoryImpl
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.AddHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.EditHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.GetHabitItemUseCase
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HabitDetailsViewModel(application: Application) : AndroidViewModel(application) {
+class HabitDetailsViewModel @Inject constructor(
+    private val getHabitItemUseCase: GetHabitItemUseCase,
+    private val addHabitListUseCase: AddHabitItemUseCase,
+    private val editHabitListUseCase: EditHabitItemUseCase,
+) : ViewModel() {
 
-    private val repository = HabitRepositoryImpl(application)
-
-    private val getHabitItemUseCase = GetHabitItemUseCase(repository)
-    private val addHabitListUseCase = AddHabitItemUseCase(repository)
-    private val editHabitListUseCase = EditHabitItemUseCase(repository)
 
     private val _errorInputTitle = MutableLiveData<Boolean>()
     val errorInputTitle: LiveData<Boolean> = _errorInputTitle

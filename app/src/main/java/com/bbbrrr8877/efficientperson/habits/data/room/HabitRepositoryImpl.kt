@@ -1,17 +1,15 @@
 package com.bbbrrr8877.efficientperson.habits.data.room
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.repositories.HabitRepository
+import javax.inject.Inject
 
-class HabitRepositoryImpl(
-    application: Application
+class HabitRepositoryImpl @Inject constructor(
+    private val habitListDao: HabitListDao,
+    private val mapper: HabitListMapper
 ) : HabitRepository {
-
-    private val habitListDao = HabitDatabase.getInstance(application).habitListDao()
-    private val mapper = HabitListMapper()
 
     override suspend fun addHabitItem(habitItem: HabitItem) {
         habitListDao.addHabitItem(mapper.mapEntityToDbModel(habitItem))

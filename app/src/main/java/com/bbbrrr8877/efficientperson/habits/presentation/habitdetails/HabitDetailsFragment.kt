@@ -1,5 +1,6 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitdetails
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,14 +10,30 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bbbrrr8877.efficientperson.App
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitDetailsBinding
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
+import com.bbbrrr8877.efficientperson.habits.presentation.ViewModelFactory
+import javax.inject.Inject
 
 class HabitDetailsFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as App).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+
+        super.onAttach(context)
+    }
+
     private val viewModel by lazy {
-        ViewModelProvider(this)[HabitDetailsViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[HabitDetailsViewModel::class.java]
     }
 
     private var _binding: FragmentHabitDetailsBinding? = null
@@ -105,10 +122,20 @@ class HabitDetailsFragment : Fragment() {
                 swGoodOrBad.visibility = View.INVISIBLE
                 if (it.isGood) {
                     tvGoodOrBad.setText(R.string.good_habit)
-                    binding.habitDetails.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.good_bg_color))
+                    binding.habitDetails.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.good_bg_color
+                        )
+                    )
                 } else {
                     tvGoodOrBad.setText(R.string.bad_habit)
-                    binding.habitDetails.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bad_bg_color))
+                    binding.habitDetails.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.bad_bg_color
+                        )
+                    )
                 }
 
                 tvPassedOrNot.setText(
