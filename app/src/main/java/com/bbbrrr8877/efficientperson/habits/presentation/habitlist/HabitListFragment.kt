@@ -1,6 +1,9 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.bbbrrr8877.efficientperson.App
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitListBinding
+import com.bbbrrr8877.efficientperson.habits.data.backgroundwork.HabitAlarmReceiver
 import com.bbbrrr8877.efficientperson.habits.presentation.ViewModelFactory
 import com.bbbrrr8877.efficientperson.habits.presentation.habitdetails.HabitDetailsFragment
+import java.util.*
 import javax.inject.Inject
 
 class HabitListFragment : Fragment() {
@@ -113,9 +118,26 @@ class HabitListFragment : Fragment() {
         }
     }
 
+
     private fun setCheckBoxClickListener() {
         habitListAdapter.onCheckBoxItemClickListener = {
             viewModel.changeDoneState(it)
+
+            val alarmManager = requireActivity().getSystemService(ALARM_SERVICE) as AlarmManager
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.SECOND, 10)
+            val intent = HabitAlarmReceiver.newIntent(requireActivity().applicationContext)
+            val pendingIntent = PendingIntent.getBroadcast(
+                requireActivity().applicationContext,
+                100,
+                intent,
+                0
+            )
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                pendingIntent
+            )
         }
     }
 
@@ -126,4 +148,8 @@ class HabitListFragment : Fragment() {
     private fun launchAddHabitItemFragment() {
         launchFragment(HabitDetailsFragment.newInstanceAddItem())
     }
+
+    //TODO(Check requireActivity().applicationContext)
+    //TODO(Check flags in PendingIntent.getBroadcast)
+    //TODO Refactor AlarmManager
 }

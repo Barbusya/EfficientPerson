@@ -1,5 +1,7 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
+import android.icu.util.Calendar
+import android.os.Build
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
@@ -15,6 +17,7 @@ class HabitListViewModel @Inject constructor(
     private val editHabitListUseCase: EditHabitItemUseCase,
 ) : ViewModel() {
 
+
     val habitList = getHabitListUseCase.getHabitList()
 
     fun deleteHabitItem(habitItem: HabitItem) {
@@ -25,8 +28,14 @@ class HabitListViewModel @Inject constructor(
 
     fun changeDoneState(habitItem: HabitItem) {
         viewModelScope.launch {
-            val newItem = habitItem.copy(isDone = !habitItem.isDone)
+            val newItem = habitItem.copy(
+                isDone = !habitItem.isDone,
+            )
             editHabitListUseCase.editHabitItem(newItem)
         }
+    }
+
+    companion object {
+        private const val DAY_OF_DONE_UNKNOWN = 1
     }
 }
