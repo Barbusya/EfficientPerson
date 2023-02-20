@@ -15,9 +15,6 @@ interface HabitListDao {
     @Query("SELECT * FROM habit_items")
     fun getHabitList(): LiveData<List<HabitItemDBModel>>
 
-//    @Query("SELECT * FROM habit_items")
-//    fun getHabitListCursor(): Cursor
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addHabitItem(habitItemDBModel: HabitItemDBModel)
 

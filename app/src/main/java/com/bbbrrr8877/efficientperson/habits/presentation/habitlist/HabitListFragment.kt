@@ -125,7 +125,9 @@ class HabitListFragment : Fragment() {
 
             val alarmManager = requireActivity().getSystemService(ALARM_SERVICE) as AlarmManager
             val calendar = Calendar.getInstance()
-            calendar.add(Calendar.SECOND, 10)
+            calendar.set(Calendar.HOUR_OF_DAY, 23)
+            calendar.set(Calendar.MINUTE, 59)
+            calendar.set(Calendar.SECOND, 0)
             val intent = HabitAlarmReceiver.newIntent(requireActivity().applicationContext)
             val pendingIntent = PendingIntent.getBroadcast(
                 requireActivity().applicationContext,

@@ -36,7 +36,7 @@ class HabitAlarmReceiver : BroadcastReceiver() {
             val workManager = WorkManager.getInstance(context)
             workManager.enqueueUniqueWork(
                 HabitWorker.WORK_NAME,
-                ExistingWorkPolicy.APPEND,
+                ExistingWorkPolicy.KEEP,
                 HabitWorker.makeRequest(page++)
             )
         }
@@ -47,8 +47,7 @@ class HabitAlarmReceiver : BroadcastReceiver() {
             val notificationChannel = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT
-            //TODO(Change importance to LOW)
+                NotificationManager.IMPORTANCE_LOW
             )
             notificationManager.createNotificationChannel(notificationChannel)
         }
@@ -65,3 +64,5 @@ class HabitAlarmReceiver : BroadcastReceiver() {
         }
     }
 }
+
+//TODO Notification Text, Title and Icon
