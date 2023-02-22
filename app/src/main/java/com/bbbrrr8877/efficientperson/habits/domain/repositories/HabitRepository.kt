@@ -1,7 +1,7 @@
 package com.bbbrrr8877.efficientperson.habits.domain.repositories
 
-import androidx.lifecycle.LiveData
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
+import kotlinx.coroutines.flow.Flow
 
 interface HabitRepository {
 
@@ -13,5 +13,5 @@ interface HabitRepository {
 
     suspend fun getHabitItem(habitItemId: Long): HabitItem
 
-    fun getHabitList(): LiveData<List<HabitItem>>
+    fun getHabitList(): Flow<List<HabitItem>>
 }
