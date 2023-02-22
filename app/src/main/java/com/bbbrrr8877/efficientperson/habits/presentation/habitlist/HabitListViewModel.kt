@@ -1,13 +1,14 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
-import android.icu.util.Calendar
-import android.os.Build
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.DeleteHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.EditHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.GetHabitListUseCase
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,6 +20,9 @@ class HabitListViewModel @Inject constructor(
 
 
     val habitList = getHabitListUseCase.getHabitList()
+        .filter { it.isNotEmpty() }
+        .onEach { }
+        .asLiveData()
 
     fun deleteHabitItem(habitItem: HabitItem) {
         viewModelScope.launch {
@@ -33,9 +37,5 @@ class HabitListViewModel @Inject constructor(
             )
             editHabitListUseCase.editHabitItem(newItem)
         }
-    }
-
-    companion object {
-        private const val DAY_OF_DONE_UNKNOWN = 1
     }
 }
