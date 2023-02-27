@@ -8,13 +8,13 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import com.bbbrrr8877.efficientperson.R
 
 class HabitAlarmReceiver : BroadcastReceiver() {
 
-    private var page = 0
 
     override fun onReceive(context: Context?, intent: Intent?) {
         context?.let {
@@ -26,8 +26,8 @@ class HabitAlarmReceiver : BroadcastReceiver() {
             createNotificationChannel(notificationManager)
 
             val notification = NotificationCompat.Builder(it, CHANNEL_ID)
-                .setContentTitle("Title")
-                .setContentText("Text")
+                .setContentTitle("Habits")
+                .setContentText("Habits refreshed")
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .build()
 
@@ -35,12 +35,13 @@ class HabitAlarmReceiver : BroadcastReceiver() {
 
             val workManager = WorkManager.getInstance(context)
             workManager.enqueueUniqueWork(
-                HabitWorker.WORK_NAME,
+                SimpleWorker.SIMPLE_WORKER_TAG,
                 ExistingWorkPolicy.KEEP,
-                HabitWorker.makeRequest(page++)
+                SimpleWorker.createWorkRequest(Data.EMPTY)
             )
         }
     }
+
 
     private fun createNotificationChannel(notificationManager: NotificationManager) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

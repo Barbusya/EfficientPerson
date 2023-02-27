@@ -15,7 +15,7 @@ import javax.inject.Inject
 class HabitListViewModel @Inject constructor(
     private val getHabitListUseCase: GetHabitListUseCase,
     private val deleteHabitListUseCase: DeleteHabitItemUseCase,
-    private val editHabitListUseCase: EditHabitItemUseCase,
+    private val editHabitItemUseCase: EditHabitItemUseCase,
 ) : ViewModel() {
 
 
@@ -35,7 +35,7 @@ class HabitListViewModel @Inject constructor(
             val newItem = habitItem.copy(
                 isDone = !habitItem.isDone,
             )
-            editHabitListUseCase.editHabitItem(newItem)
+            editHabitItemUseCase.editHabitItem(newItem)
         }
     }
 }
