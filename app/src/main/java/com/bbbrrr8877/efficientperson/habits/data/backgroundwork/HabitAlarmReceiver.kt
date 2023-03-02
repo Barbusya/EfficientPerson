@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
@@ -18,20 +19,20 @@ class HabitAlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         context?.let {
-            val notificationManager = getSystemService(
-                it,
-                NotificationManager::class.java
-            ) as NotificationManager
-
-            createNotificationChannel(notificationManager)
-
-            val notification = NotificationCompat.Builder(it, CHANNEL_ID)
-                .setContentTitle("Habits")
-                .setContentText("Habits refreshed")
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .build()
-
-            notificationManager.notify(NOTIFICATION_ID, notification)
+//            val notificationManager = getSystemService(
+//                it,
+//                NotificationManager::class.java
+//            ) as NotificationManager
+//
+//            createNotificationChannel(notificationManager)
+//
+//            val notification = NotificationCompat.Builder(it, CHANNEL_ID)
+//                .setContentTitle("Habits")
+//                .setContentText("Habits refreshed")
+//                .setSmallIcon(R.drawable.ic_launcher_background)
+//                .build()
+//
+//            notificationManager.notify(NOTIFICATION_ID, notification)
 
             val workManager = WorkManager.getInstance(context)
             workManager.enqueueUniqueWork(
@@ -39,6 +40,10 @@ class HabitAlarmReceiver : BroadcastReceiver() {
                 ExistingWorkPolicy.KEEP,
                 SimpleWorker.createWorkRequest(Data.EMPTY)
             )
+//            ContextCompat.startForegroundService(
+//                context,
+//                HabitForegroundService.newIntent(context)
+//            )
         }
     }
 

@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <receiver android:name="com.bbbrrr8877.efficientperson.habits.data.backgroundwork.HabitAlarmReceiver" />
+        <service android:name="com.bbbrrr8877.efficientperson.habits.data.backgroundwork.HabitForegroundService" />
     </application>
 
 </manifest>
