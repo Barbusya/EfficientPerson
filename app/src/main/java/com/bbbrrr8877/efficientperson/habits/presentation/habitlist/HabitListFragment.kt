@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bbbrrr8877.efficientperson.App
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitListBinding
-import com.bbbrrr8877.efficientperson.habits.data.backgroundwork.HabitAlarmReceiver
+import com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitAlarmReceiver
 import com.bbbrrr8877.efficientperson.habits.presentation.ViewModelFactory
 import com.bbbrrr8877.efficientperson.habits.presentation.habitdetails.HabitDetailsFragment
 import java.util.*
