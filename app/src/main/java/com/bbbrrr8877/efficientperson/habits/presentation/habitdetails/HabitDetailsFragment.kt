@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bbbrrr8877.efficientperson.App
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitDetailsBinding
-import com.bbbrrr8877.efficientperson.habits.data.backgroundwork.HabitAlarmReceiver
+import com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitAlarmReceiver
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.presentation.ViewModelFactory
 import java.util.*
@@ -117,28 +117,12 @@ class HabitDetailsFragment : Fragment() {
                 etDescription.setText(it.description)
                 cbPassedOrNot.isChecked = it.isDone
                 cbPassedOrNot.setOnClickListener {
+                    viewModel.setUpdatingHabitsByDone(requireActivity())
                     if (binding.cbPassedOrNot.isChecked) {
                         binding.tvPassedOrNot.setText(R.string.passed)
                     } else {
                         binding.tvPassedOrNot.setText(R.string.not_passed)
                     }
-                    val alarmManager = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                    val calendar = Calendar.getInstance()
-                    calendar.set(Calendar.HOUR_OF_DAY, 23)
-                    calendar.set(Calendar.MINUTE, 59)
-                    calendar.set(Calendar.SECOND, 0)
-                    val intent = HabitAlarmReceiver.newIntent(requireActivity().applicationContext)
-                    val pendingIntent = PendingIntent.getBroadcast(
-                        requireActivity().applicationContext,
-                        100,
-                        intent,
-                        0
-                    )
-                    alarmManager.setExact(
-                        AlarmManager.RTC_WAKEUP,
-                        calendar.timeInMillis,
-                        pendingIntent
-                    )
                 }
                 swGoodOrBad.visibility = View.INVISIBLE
                 if (it.isGood) {

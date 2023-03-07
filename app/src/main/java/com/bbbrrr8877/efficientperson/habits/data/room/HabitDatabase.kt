@@ -1,6 +1,7 @@
 package com.bbbrrr8877.efficientperson.habits.data.room
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,7 +17,7 @@ abstract class HabitDatabase : RoomDatabase() {
         private val LOCK = Any()
         private const val DB_NAME = "habit_items.db"
 
-        fun getInstance(application: Application): HabitDatabase {
+        fun getInstance(context: Context): HabitDatabase {
             INSTANCE?.let {
                 return it
             }
@@ -25,7 +26,7 @@ abstract class HabitDatabase : RoomDatabase() {
                     return it
                 }
                 val db = Room.databaseBuilder(
-                    application,
+                    context,
                     HabitDatabase::class.java,
                     DB_NAME
                 )

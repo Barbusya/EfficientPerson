@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bbbrrr8877.efficientperson.App
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitListBinding
-import com.bbbrrr8877.efficientperson.habits.data.backgroundwork.HabitAlarmReceiver
+import com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitAlarmReceiver
 import com.bbbrrr8877.efficientperson.habits.presentation.ViewModelFactory
 import com.bbbrrr8877.efficientperson.habits.presentation.habitdetails.HabitDetailsFragment
 import java.util.*
@@ -122,24 +122,7 @@ class HabitListFragment : Fragment() {
     private fun setCheckBoxClickListener() {
         habitListAdapter.onCheckBoxItemClickListener = {
             viewModel.changeDoneState(it)
-
-            val alarmManager = requireActivity().getSystemService(ALARM_SERVICE) as AlarmManager
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.HOUR_OF_DAY, 23)
-            calendar.set(Calendar.MINUTE, 59)
-            calendar.set(Calendar.SECOND, 0)
-            val intent = HabitAlarmReceiver.newIntent(requireActivity().applicationContext)
-            val pendingIntent = PendingIntent.getBroadcast(
-                requireActivity().applicationContext,
-                100,
-                intent,
-                0
-            )
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
+            viewModel.setUpdatingHabitsByDone(requireActivity())
         }
     }
 
