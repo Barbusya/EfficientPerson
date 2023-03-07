@@ -21,24 +21,24 @@ class HabitWorker(
     private val dao = habitDatabase.getInstance(context.applicationContext).habitListDao()
     override suspend fun doWork(): Result {
 
-        val notificationManager = getSystemService(
-            context,
-            NotificationManager::class.java
-        ) as NotificationManager
-
-        createNotificationChannel(notificationManager)
-
-        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setContentTitle("Habits")
-            .setContentText("Habits refreshed")
-            .setSmallIcon(R.drawable.ic_launcher_background)
-            .build()
-
-        notificationManager.notify(NOTIFICATION_ID, notification)
 
         try {
             dao.getHabitList()
                 .collect {
+                    val notificationManager = getSystemService(
+                        context,
+                        NotificationManager::class.java
+                    ) as NotificationManager
+
+                    createNotificationChannel(notificationManager)
+
+                    val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+                        .setContentTitle("Habits")
+                        .setContentText("Habits refreshed")
+                        .setSmallIcon(R.drawable.ic_launcher_background)
+                        .build()
+
+                    notificationManager.notify(NOTIFICATION_ID, notification)
 
                     for (item in it) {
                         val newItem = item.copy(
@@ -49,13 +49,17 @@ class HabitWorker(
 
                     }
                     cancelWork(context)
-                    notificationManager.cancel(NOTIFICATION_ID)
                 }
             return Result.success()
+
         } catch (e: Exception) {
             Log.e("SimpleWorker", "Error updating habits", e)
             return Result.failure()
         } finally {
+            val notificationManager = getSystemService(
+                context,
+                NotificationManager::class.java
+            ) as NotificationManager
             notificationManager.cancel(NOTIFICATION_ID)
         }
     }

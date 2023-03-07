@@ -1,5 +1,6 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitdetails
 
+import android.app.Activity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.AddHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.EditHabitItemUseCase
 import com.bbbrrr8877.efficientperson.habits.domain.usecases.GetHabitItemUseCase
+import com.bbbrrr8877.efficientperson.habits.domain.usecases.SetUpdatingHabitsByDoneUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,7 +17,8 @@ class HabitDetailsViewModel @Inject constructor(
     private val getHabitItemUseCase: GetHabitItemUseCase,
     private val addHabitListUseCase: AddHabitItemUseCase,
     private val editHabitListUseCase: EditHabitItemUseCase,
-) : ViewModel() {
+    private val setUpdatingHabitsByDoneUseCase: SetUpdatingHabitsByDoneUseCase,
+    ) : ViewModel() {
 
 
     private val _errorInputTitle = MutableLiveData<Boolean>()
@@ -77,6 +80,12 @@ class HabitDetailsViewModel @Inject constructor(
                     finishWork()
                 }
             }
+        }
+    }
+
+    fun setUpdatingHabitsByDone(activity: Activity) {
+        viewModelScope.launch {
+            setUpdatingHabitsByDoneUseCase.startAlarmManager(activity)
         }
     }
 

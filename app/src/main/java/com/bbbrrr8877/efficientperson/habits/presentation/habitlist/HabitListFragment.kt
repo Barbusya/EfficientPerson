@@ -122,26 +122,7 @@ class HabitListFragment : Fragment() {
     private fun setCheckBoxClickListener() {
         habitListAdapter.onCheckBoxItemClickListener = {
             viewModel.changeDoneState(it)
-
-//            SimpleWorker.startWork(requireActivity().applicationContext)
-            val alarmManager = requireActivity().getSystemService(ALARM_SERVICE) as AlarmManager
-            val calendar = Calendar.getInstance()
-//            calendar.set(Calendar.HOUR_OF_DAY, 0)
-//            calendar.set(Calendar.MINUTE, 20)
-//            calendar.set(Calendar.SECOND, 0)
-            calendar.add(Calendar.SECOND, 4)
-            val intent = HabitAlarmReceiver.newIntent(requireActivity().applicationContext)
-            val pendingIntent = PendingIntent.getBroadcast(
-                requireActivity().applicationContext,
-                100,
-                intent,
-                0
-            )
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
+            viewModel.setUpdatingHabitsByDone(requireActivity())
         }
     }
 

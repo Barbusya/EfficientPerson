@@ -13,7 +13,7 @@ class App : Application(), Configuration.Provider {
     override fun getWorkManagerConfiguration(): Configuration {
 
         val myWorkerFactory = DelegatingWorkerFactory()
-        myWorkerFactory.addFactory(MyWorkerFactory(HabitDatabase, HabitListMapper()))
+        myWorkerFactory.addFactory(MyWorkerFactory(HabitDatabase))
 
         return Configuration.Builder()
             .setMinimumLoggingLevel(android.util.Log.INFO)
