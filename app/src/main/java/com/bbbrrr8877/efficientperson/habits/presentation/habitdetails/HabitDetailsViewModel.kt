@@ -18,7 +18,7 @@ class HabitDetailsViewModel @Inject constructor(
     private val addHabitListUseCase: AddHabitItemUseCase,
     private val editHabitListUseCase: EditHabitItemUseCase,
     private val setUpdatingHabitsByDoneUseCase: SetUpdatingHabitsByDoneUseCase,
-    ) : ViewModel() {
+) : ViewModel() {
 
 
     private val _errorInputTitle = MutableLiveData<Boolean>()
@@ -32,10 +32,14 @@ class HabitDetailsViewModel @Inject constructor(
 
     fun getHabitItem(habitItemId: Long) {
         viewModelScope.launch {
-            val item = getHabitItemUseCase.getHabitItem(habitItemId)
-            _habitItem.value = item
+            getHabitItemUseCase.getHabitItem(habitItemId)
+                .collect {
+                    _habitItem.value = it
+                }
         }
     }
+
+//
 
     fun addHabitItem(
         inputTitle: String?,

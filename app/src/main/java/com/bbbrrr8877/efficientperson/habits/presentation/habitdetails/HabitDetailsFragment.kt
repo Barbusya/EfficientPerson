@@ -251,4 +251,3 @@ class HabitDetailsFragment : Fragment() {
     }
 }
 
-//TODO Duplicate code of Alarm Manager

@@ -11,7 +11,7 @@ interface HabitRepository {
 
     suspend fun editHabitItem(habitItem: HabitItem)
 
-    suspend fun getHabitItem(habitItemId: Long): HabitItem
+    fun getHabitItem(habitItemId: Long): Flow<HabitItem>
 
     fun getHabitList(): Flow<List<HabitItem>>
 }
