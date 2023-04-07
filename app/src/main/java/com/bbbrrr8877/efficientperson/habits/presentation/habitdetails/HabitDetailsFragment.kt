@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bbbrrr8877.efficientperson.App
@@ -112,6 +114,7 @@ class HabitDetailsFragment : Fragment() {
     private fun launchEditMode() {
         viewModel.getHabitItem(habitItemId)
         viewModel.habitItem.observe(viewLifecycleOwner) {
+            val habitItem = it
             with(binding) {
                 etTitle.setText(it.title)
                 etDescription.setText(it.description)
@@ -150,6 +153,10 @@ class HabitDetailsFragment : Fragment() {
                         R.string.not_passed
                     }
                 )
+                buttonDeleteHabit.setOnClickListener {
+                    viewModel.deleteHabitItem(habitItem)
+                    backToList()
+                }
             }
 
         }
@@ -159,6 +166,9 @@ class HabitDetailsFragment : Fragment() {
                 binding.etDescription.text?.toString(),
                 binding.cbPassedOrNot.isChecked
             )
+        }
+        binding.buttonDeleteHabit.setOnClickListener {
+
         }
     }
 
@@ -191,7 +201,11 @@ class HabitDetailsFragment : Fragment() {
                     )
                 }
             }
+            buttonDeleteHabit.setOnClickListener {
+                backToList()
+            }
         }
+
 
         binding.saveButton.setOnClickListener {
             viewModel.addHabitItem(
