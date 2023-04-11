@@ -16,7 +16,7 @@ class MyWorkerFactory(
         workerParameters: WorkerParameters
     ): ListenableWorker? {
 
-        return when(workerClassName) {
+        return when (workerClassName) {
             HabitWorker::class.java.name ->
                 HabitWorker(appContext, workerParameters, habitDatabase)
             else ->

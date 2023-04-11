@@ -9,7 +9,7 @@ import com.bbbrrr8877.efficientperson.habits.domain.repositories.SetBackgroundWo
 import java.util.*
 import javax.inject.Inject
 
-class SetBackgroundWorkImpl @Inject constructor(): SetBackgroundWork {
+class ResetHabitStatus @Inject constructor() : SetBackgroundWork {
 
     override suspend fun startAlarmManager(activity: Activity) {
         val alarmManager = activity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -32,4 +32,3 @@ class SetBackgroundWorkImpl @Inject constructor(): SetBackgroundWork {
         )
     }
 }
-//34364

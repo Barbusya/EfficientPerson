@@ -1,6 +1,6 @@
 package com.bbbrrr8877.efficientperson.di
 
-import com.bbbrrr8877.efficientperson.habits.data.background.SetBackgroundWorkImpl
+import com.bbbrrr8877.efficientperson.habits.data.background.ResetHabitStatus
 import com.bbbrrr8877.efficientperson.habits.domain.repositories.SetBackgroundWork
 import dagger.Binds
 import dagger.Module
@@ -10,5 +10,5 @@ interface BackgroundModule {
 
     @ApplicationScope
     @Binds
-    fun bindSetBackgroundWork(impl: SetBackgroundWorkImpl): SetBackgroundWork
+    fun bindRestHabitStatus(impl: ResetHabitStatus): SetBackgroundWork
 }
