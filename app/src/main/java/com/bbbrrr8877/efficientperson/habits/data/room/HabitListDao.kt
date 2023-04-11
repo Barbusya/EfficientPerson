@@ -19,6 +19,6 @@ interface HabitListDao {
     suspend fun deleteHabitItem(habitItemId: Long)
 
     @Query("SELECT * FROM habit_items WHERE id=:habitItemId LIMIT 1")
-    suspend fun getHabitItem(habitItemId: Long): HabitItemDBModel
+    fun getHabitItem(habitItemId: Long): Flow<HabitItemDBModel>
 
 }

@@ -6,19 +6,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
-import com.bbbrrr8877.efficientperson.habits.domain.usecases.AddHabitItemUseCase
-import com.bbbrrr8877.efficientperson.habits.domain.usecases.EditHabitItemUseCase
-import com.bbbrrr8877.efficientperson.habits.domain.usecases.GetHabitItemUseCase
-import com.bbbrrr8877.efficientperson.habits.domain.usecases.SetUpdatingHabitsByDoneUseCase
+import com.bbbrrr8877.efficientperson.habits.domain.usecases.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HabitDetailsViewModel @Inject constructor(
     private val getHabitItemUseCase: GetHabitItemUseCase,
+    private val deleteHabitListUseCase: DeleteHabitItemUseCase,
     private val addHabitListUseCase: AddHabitItemUseCase,
     private val editHabitListUseCase: EditHabitItemUseCase,
     private val setUpdatingHabitsByDoneUseCase: SetUpdatingHabitsByDoneUseCase,
-    ) : ViewModel() {
+) : ViewModel() {
 
 
     private val _errorInputTitle = MutableLiveData<Boolean>()
@@ -32,8 +30,16 @@ class HabitDetailsViewModel @Inject constructor(
 
     fun getHabitItem(habitItemId: Long) {
         viewModelScope.launch {
-            val item = getHabitItemUseCase.getHabitItem(habitItemId)
-            _habitItem.value = item
+            getHabitItemUseCase.getHabitItem(habitItemId)
+                .collect {
+                    _habitItem.value = it
+                }
+        }
+    }
+
+    fun deleteHabitItem(habitItem: HabitItem) {
+        viewModelScope.launch {
+            deleteHabitListUseCase.deleteHabitItem(habitItem)
         }
     }
 

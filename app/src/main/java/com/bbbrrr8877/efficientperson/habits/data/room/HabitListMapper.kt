@@ -19,7 +19,7 @@ class HabitListMapper @Inject constructor() {
         description = habitItemDBModel.description,
         isGood = habitItemDBModel.isGood,
         isDone = habitItemDBModel.isDone,
-        )
+    )
 
     fun mapListDBModelToListEntity(list: List<HabitItemDBModel>) = list.map {
         mapDbModelToEntity(it)

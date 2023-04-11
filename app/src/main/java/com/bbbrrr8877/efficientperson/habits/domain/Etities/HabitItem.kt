@@ -7,8 +7,7 @@ data class HabitItem(
     val description: String = "",
     val isGood: Boolean,
     val isDone: Boolean,
-    var id: Long = UNDEFINED_ID
-    ,
+    var id: Long = UNDEFINED_ID,
 ) {
     companion object {
         const val  UNDEFINED_ID = 0L
