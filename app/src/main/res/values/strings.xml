@@ -12,4 +12,5 @@
     <string name="passed_or_not">Passed or not</string>
     <string name="passed">Passed</string>
     <string name="not_passed">Not passed</string>
+    <string name="delete">Deleting</string>
 </resources>
