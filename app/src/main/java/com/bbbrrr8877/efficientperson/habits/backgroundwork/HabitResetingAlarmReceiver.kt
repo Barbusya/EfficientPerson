@@ -7,8 +7,7 @@ import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 
-class HabitAlarmReceiver : BroadcastReceiver() {
-
+class HabitResetingAlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         context?.let {
@@ -25,12 +24,8 @@ class HabitAlarmReceiver : BroadcastReceiver() {
 
     companion object {
 
-        private const val CHANNEL_ID = "channel_id"
-        private const val CHANNEL_NAME = "channel_name"
-        private const val NOTIFICATION_ID = 1
-
         fun newIntent(context: Context): Intent {
-            return Intent(context, HabitAlarmReceiver::class.java)
+            return Intent(context, HabitResetingAlarmReceiver::class.java)
         }
     }
 }

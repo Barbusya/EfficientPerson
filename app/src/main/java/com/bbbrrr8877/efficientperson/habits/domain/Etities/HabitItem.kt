@@ -5,6 +5,7 @@ data class HabitItem(
     val description: String = "",
     val isGood: Boolean,
     val isDone: Boolean,
+    val deleteTime: Long,
     var id: Long = UNDEFINED_ID,
 ) {
     companion object {

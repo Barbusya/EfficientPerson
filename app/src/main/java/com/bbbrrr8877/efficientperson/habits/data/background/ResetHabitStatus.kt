@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
-import com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitAlarmReceiver
+import com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitResetingAlarmReceiver
 import com.bbbrrr8877.efficientperson.habits.domain.repositories.SetBackgroundWork
 import java.util.*
 import javax.inject.Inject
@@ -18,7 +18,7 @@ class ResetHabitStatus @Inject constructor() : SetBackgroundWork {
 //            calendar.set(Calendar.MINUTE, 20)
 //            calendar.set(Calendar.SECOND, 0)
         calendar.add(Calendar.SECOND, 4)
-        val intent = HabitAlarmReceiver.newIntent(activity.applicationContext)
+        val intent = HabitResetingAlarmReceiver.newIntent(activity.applicationContext)
         val pendingIntent = PendingIntent.getBroadcast(
             activity.applicationContext,
             100,
