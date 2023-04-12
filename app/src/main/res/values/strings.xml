@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Efficient Person</string>
     <string name="add_habit_content_description">Add new habit</string>
-    <string name="delete_habit_content_description">Add new habit</string>
+    <string name="delete_habit_content_description">Delete habit</string>
+    <string name="restore_habit_content_description">Restore habit</string>
     <string name="title_hint">Title:</string>
     <string name="description_hint">Description:</string>
     <string name="save_btn">Save</string>
@@ -13,4 +14,5 @@
     <string name="passed">Passed</string>
     <string name="not_passed">Not passed</string>
     <string name="delete">Deleting</string>
+    <string name="restore_btn">Restore</string>
 </resources>

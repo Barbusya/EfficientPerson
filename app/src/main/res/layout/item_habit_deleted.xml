@@ -47,7 +47,7 @@
             android:textColor="@color/habit_deleted_text_color"
             android:textSize="16sp"
             android:textStyle="bold"
-            tools:text="5дн 00часов 00мин" />
+            tools:text="5d 00h 00m" />
 
     </LinearLayout>
 
