@@ -14,11 +14,10 @@ class HabitDeletingAlarmReceiver : BroadcastReceiver() {
 
             val workManager = WorkManager.getInstance(context)
             workManager.enqueueUniqueWork(
-                HabitWorker.SIMPLE_WORKER_TAG,
-                ExistingWorkPolicy.KEEP,
-                HabitWorker.createWorkRequest(Data.EMPTY)
+                DeletingHabitWorker.DELETING_WORKER_TAG,
+                ExistingWorkPolicy.APPEND_OR_REPLACE,
+                DeletingHabitWorker.createWorkRequest(habitId)
             )
-
         }
     }
 

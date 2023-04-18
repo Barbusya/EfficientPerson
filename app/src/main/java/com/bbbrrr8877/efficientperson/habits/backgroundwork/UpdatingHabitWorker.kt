@@ -11,35 +11,33 @@ import androidx.work.*
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.habits.data.room.HabitDatabase
 
-class HabitWorker(
+class UpdatingHabitWorker(
     private val context: Context,
     private val workerParameters: WorkerParameters,
     private val habitDatabase: HabitDatabase.Companion,
 ) : CoroutineWorker(context, workerParameters) {
 
-
     private val dao = habitDatabase.getInstance(context.applicationContext).habitListDao()
     override suspend fun doWork(): Result {
 
-
         try {
+            val notificationManager = getSystemService(
+                context,
+                NotificationManager::class.java
+            ) as NotificationManager
+
+            createNotificationChannel(notificationManager)
+
+            val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentTitle("Habits")
+                .setContentText("Habits refreshed")
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .build()
+
+            notificationManager.notify(NOTIFICATION_ID, notification)
+
             dao.getHabitList()
                 .collect {
-                    val notificationManager = getSystemService(
-                        context,
-                        NotificationManager::class.java
-                    ) as NotificationManager
-
-                    createNotificationChannel(notificationManager)
-
-                    val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-                        .setContentTitle("Habits")
-                        .setContentText("Habits refreshed")
-                        .setSmallIcon(R.drawable.ic_launcher_background)
-                        .build()
-
-                    notificationManager.notify(NOTIFICATION_ID, notification)
-
                     for (item in it) {
                         val newItem = item.copy(
                             isDone = false,
@@ -53,7 +51,7 @@ class HabitWorker(
             return Result.success()
 
         } catch (e: Exception) {
-            Log.e("SimpleWorker", "Error updating habits", e)
+            Log.e("UpdatingHabitWorker", "Error updating habits", e)
             return Result.failure()
         } finally {
             val notificationManager = getSystemService(
@@ -80,17 +78,17 @@ class HabitWorker(
         private const val CHANNEL_ID = "channel_id"
         private const val CHANNEL_NAME = "channel_name"
         private const val NOTIFICATION_ID = 1
-        const val SIMPLE_WORKER_TAG = "SimpleWorkerTag"
+        const val UPDATING_WORKER_TAG = "UpdatingHabitWorkerTag"
 
         fun createWorkRequest(data: Data): OneTimeWorkRequest {
-            return OneTimeWorkRequest.Builder(HabitWorker::class.java)
+            return OneTimeWorkRequest.Builder(UpdatingHabitWorker::class.java)
                 .setInputData(data)
-                .addTag(SIMPLE_WORKER_TAG)
+                .addTag(UPDATING_WORKER_TAG)
                 .build()
         }
 
         fun cancelWork(context: Context) {
-            WorkManager.getInstance(context).cancelAllWorkByTag(SIMPLE_WORKER_TAG)
+            WorkManager.getInstance(context).cancelAllWorkByTag(UPDATING_WORKER_TAG)
         }
     }
 }

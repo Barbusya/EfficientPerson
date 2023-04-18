@@ -8,11 +8,11 @@ import javax.inject.Inject
  * Set AlarmManager at 29:00 which start Broadcast Receiver which start WorkManager.
  */
 
-class SetUpdatingHabitsByDoneUseCase @Inject constructor(
+class DeletingHabitUseCase @Inject constructor(
     private val updatingHabitBackgroundWork: UpdatingHabitBackgroundWork
 ) {
 
-    suspend fun startAlarmManager(activity: Activity) {
+    suspend fun startDeletingAlarmManager(activity: Activity) {
         updatingHabitBackgroundWork.startAlarmManager(activity)
     }
 }

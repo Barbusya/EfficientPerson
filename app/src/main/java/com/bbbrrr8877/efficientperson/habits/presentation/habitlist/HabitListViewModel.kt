@@ -5,10 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
-import com.bbbrrr8877.efficientperson.habits.domain.usecases.DeleteHabitItemUseCase
-import com.bbbrrr8877.efficientperson.habits.domain.usecases.EditHabitItemUseCase
-import com.bbbrrr8877.efficientperson.habits.domain.usecases.GetHabitListUseCase
-import com.bbbrrr8877.efficientperson.habits.domain.usecases.SetUpdatingHabitsByDoneUseCase
+import com.bbbrrr8877.efficientperson.habits.domain.usecases.*
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -16,9 +13,10 @@ import javax.inject.Inject
 
 class HabitListViewModel @Inject constructor(
     private val getHabitListUseCase: GetHabitListUseCase,
-    private val deleteHabitListUseCase: DeleteHabitItemUseCase,
+    private val deleteHabitItemUseCase: DeleteHabitItemUseCase,
     private val editHabitItemUseCase: EditHabitItemUseCase,
     private val setUpdatingHabitsByDoneUseCase: SetUpdatingHabitsByDoneUseCase,
+    private val deletingHabitUseCase: DeletingHabitUseCase,
 ) : ViewModel() {
 
     val habitList = getHabitListUseCase.getHabitList()
@@ -28,7 +26,7 @@ class HabitListViewModel @Inject constructor(
 
     fun deleteHabitItem(habitItem: HabitItem) {
         viewModelScope.launch {
-            deleteHabitListUseCase.deleteHabitItem(habitItem)
+            deleteHabitItemUseCase.deleteHabitItem(habitItem)
         }
     }
 
@@ -44,6 +42,12 @@ class HabitListViewModel @Inject constructor(
     fun setUpdatingHabitsByDone(activity: Activity) {
         viewModelScope.launch {
             setUpdatingHabitsByDoneUseCase.startAlarmManager(activity)
+        }
+    }
+
+    fun deleteHabit(activity: Activity) {
+        viewModelScope.launch {
+            deletingHabitUseCase.startDeletingAlarmManager(activity)
         }
     }
 }

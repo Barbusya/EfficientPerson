@@ -17,8 +17,10 @@ class MyWorkerFactory(
     ): ListenableWorker? {
 
         return when (workerClassName) {
-            HabitWorker::class.java.name ->
-                HabitWorker(appContext, workerParameters, habitDatabase)
+            DeletingHabitWorker::class.java.name ->
+                DeletingHabitWorker(appContext, workerParameters, habitDatabase)
+            UpdatingHabitWorker::class.java.name ->
+                UpdatingHabitWorker(appContext, workerParameters, habitDatabase)
             else ->
                 null
         }

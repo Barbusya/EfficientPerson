@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <receiver android:name="com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitResetingAlarmReceiver" />
-        <service android:name="com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitForegroundService" />
+        <receiver android:name="com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitDeletingAlarmReceiver" />
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
