@@ -206,7 +206,7 @@ class HabitDetailsFragment : Fragment() {
                 binding.etTitle.text?.toString(),
                 binding.etDescription.text?.toString(),
                 binding.swGoodOrBad.isChecked,
-                binding.cbPassedOrNot.isChecked
+                binding.cbPassedOrNot.isChecked,
             )
         }
     }

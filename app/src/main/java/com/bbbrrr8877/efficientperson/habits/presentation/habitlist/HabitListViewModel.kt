@@ -1,6 +1,7 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import android.app.Activity
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,7 +17,7 @@ class HabitListViewModel @Inject constructor(
     private val deleteHabitItemUseCase: DeleteHabitItemUseCase,
     private val editHabitItemUseCase: EditHabitItemUseCase,
     private val setUpdatingHabitsByDoneUseCase: SetUpdatingHabitsByDoneUseCase,
-    private val deletingHabitUseCase: DeletingHabitUseCase,
+    private val deletingHabitItemUseCase: DeletingHabitItemUseCase,
 ) : ViewModel() {
 
     val habitList = getHabitListUseCase.getHabitList()
@@ -45,9 +46,11 @@ class HabitListViewModel @Inject constructor(
         }
     }
 
-    fun deleteHabit(activity: Activity) {
+    fun setDeletingHabit(activity: Activity, habitItemId: Long) {
         viewModelScope.launch {
-            deletingHabitUseCase.startDeletingAlarmManager(activity)
+            deletingHabitItemUseCase.startDeletingAlarmManager(activity, habitItemId)
+            Log.d("DeletingItem", "view model")
         }
     }
+
 }

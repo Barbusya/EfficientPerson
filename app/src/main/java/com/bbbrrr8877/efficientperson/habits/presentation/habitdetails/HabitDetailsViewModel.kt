@@ -47,7 +47,7 @@ class HabitDetailsViewModel @Inject constructor(
         inputTitle: String?,
         inputDescription: String?,
         inputQuality: Boolean,
-        inputProgress: Boolean
+        inputProgress: Boolean,
     ) {
         val title = parseTitle(inputTitle)
         val description = parseDescription(inputDescription)
@@ -58,7 +58,8 @@ class HabitDetailsViewModel @Inject constructor(
                     title = title,
                     description = description,
                     isGood = inputQuality,
-                    isDone = inputProgress
+                    isDone = inputProgress,
+                    deleteTime = 0L
                 )
                 addHabitListUseCase.addHabitItem(habitItem)
                 finishWork()

@@ -1,7 +1,8 @@
 package com.bbbrrr8877.efficientperson.di
 
-import com.bbbrrr8877.efficientperson.habits.data.background.DeleteHabit
-import com.bbbrrr8877.efficientperson.habits.data.background.ResetHabitStatus
+import com.bbbrrr8877.efficientperson.habits.data.background.DeleteHabitAlarm
+import com.bbbrrr8877.efficientperson.habits.data.background.ResetHabitStatusAlarm
+import com.bbbrrr8877.efficientperson.habits.domain.repositories.DeletingHabitBackgroundWork
 import com.bbbrrr8877.efficientperson.habits.domain.repositories.UpdatingHabitBackgroundWork
 import dagger.Binds
 import dagger.Module
@@ -11,9 +12,9 @@ interface BackgroundModule {
 
     @ApplicationScope
     @Binds
-    fun bindResetHabitStatus(impl: ResetHabitStatus): UpdatingHabitBackgroundWork
+    fun bindResetHabitStatus(impl: ResetHabitStatusAlarm): UpdatingHabitBackgroundWork
 
     @ApplicationScope
     @Binds
-    fun bindDeleteHabit(impl: DeleteHabit): UpdatingHabitBackgroundWork
+    fun bindDeleteHabit(impl: DeleteHabitAlarm): DeletingHabitBackgroundWork
 }

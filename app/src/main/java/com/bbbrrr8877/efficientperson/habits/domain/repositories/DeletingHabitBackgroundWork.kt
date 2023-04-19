@@ -4,5 +4,5 @@ import android.app.Activity
 
 interface DeletingHabitBackgroundWork {
 
-    suspend fun startUpdatingAlarmManager(activity: Activity)
+    suspend fun startDeletingAlarmManager(activity: Activity, habitItemId: Long)
 }

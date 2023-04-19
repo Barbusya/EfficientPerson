@@ -5,7 +5,7 @@ import com.bbbrrr8877.efficientperson.habits.domain.repositories.UpdatingHabitBa
 import javax.inject.Inject
 
 /**
- * Set AlarmManager at 29:00 which start Broadcast Receiver which start WorkManager.
+ * Set AlarmManager at 23:59 which start Broadcast Receiver which start WorkManager.
  */
 
 class SetUpdatingHabitsByDoneUseCase @Inject constructor(
@@ -13,6 +13,6 @@ class SetUpdatingHabitsByDoneUseCase @Inject constructor(
 ) {
 
     suspend fun startAlarmManager(activity: Activity) {
-        updatingHabitBackgroundWork.startAlarmManager(activity)
+        updatingHabitBackgroundWork.startUpdatingAlarmManager(activity)
     }
 }
