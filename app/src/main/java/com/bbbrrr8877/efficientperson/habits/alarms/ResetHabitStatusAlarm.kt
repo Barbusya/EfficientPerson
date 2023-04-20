@@ -1,4 +1,4 @@
-package com.bbbrrr8877.efficientperson.habits.data.background
+package com.bbbrrr8877.efficientperson.habits.alarms
 
 import android.app.Activity
 import android.app.AlarmManager

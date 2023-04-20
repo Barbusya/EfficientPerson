@@ -39,7 +39,7 @@ class HabitDetailsViewModel @Inject constructor(
 
     fun deleteHabitItem(habitItem: HabitItem) {
         viewModelScope.launch {
-            deleteHabitListUseCase.deleteHabitItem(habitItem)
+            deleteHabitListUseCase.deleteHabitItem(habitItem.id)
         }
     }
 

@@ -2,7 +2,6 @@ package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -126,8 +125,7 @@ class HabitListFragment : Fragment() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val item = habitListAdapter.currentList[viewHolder.adapterPosition]
-                viewModel.setDeletingHabit(requireActivity(), item.id)
-                Log.d("DeletingItem", "fragment")
+                viewModel.deleteHabitItem(item)
             }
         }
         val itemTouchHelper = ItemTouchHelper(callback)

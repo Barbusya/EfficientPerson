@@ -17,8 +17,6 @@ class MyWorkerFactory(
     ): ListenableWorker? {
 
         return when (workerClassName) {
-            DeletingHabitWorker::class.java.name ->
-                DeletingHabitWorker(appContext, workerParameters, habitDatabase)
             UpdatingHabitWorker::class.java.name ->
                 UpdatingHabitWorker(appContext, workerParameters, habitDatabase)
             else ->
