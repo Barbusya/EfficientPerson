@@ -15,4 +15,5 @@ class SetUpdatingHabitsByDoneUseCase @Inject constructor(
     suspend fun startAlarmManager(activity: Activity) {
         updatingHabitBackgroundWork.startUpdatingAlarmManager(activity)
     }
+
 }

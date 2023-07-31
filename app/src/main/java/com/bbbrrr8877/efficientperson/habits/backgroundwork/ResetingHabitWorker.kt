@@ -11,7 +11,7 @@ import androidx.work.*
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.habits.data.room.HabitDatabase
 
-class UpdatingHabitWorker(
+class ResetingHabitWorker(
     private val context: Context,
     private val workerParameters: WorkerParameters,
     private val habitDatabase: HabitDatabase.Companion,
@@ -46,12 +46,12 @@ class UpdatingHabitWorker(
                         Log.d("SimpleWorker", habitItem.toString())
 
                     }
-                    cancelWork(context)
+                    notificationManager.cancel(NOTIFICATION_ID)
                 }
             return Result.success()
 
         } catch (e: Exception) {
-            Log.e("UpdatingHabitWorker", "Error updating habits", e)
+            Log.e("ResetingHabitWorker", "Error updating habits", e)
             return Result.failure()
         } finally {
             val notificationManager = getSystemService(
@@ -81,14 +81,10 @@ class UpdatingHabitWorker(
         const val UPDATING_WORKER_TAG = "UpdatingHabitWorkerTag"
 
         fun createWorkRequest(data: Data): OneTimeWorkRequest {
-            return OneTimeWorkRequest.Builder(UpdatingHabitWorker::class.java)
+            return OneTimeWorkRequest.Builder(ResetingHabitWorker::class.java)
                 .setInputData(data)
                 .addTag(UPDATING_WORKER_TAG)
                 .build()
-        }
-
-        fun cancelWork(context: Context) {
-            WorkManager.getInstance(context).cancelAllWorkByTag(UPDATING_WORKER_TAG)
         }
     }
 }

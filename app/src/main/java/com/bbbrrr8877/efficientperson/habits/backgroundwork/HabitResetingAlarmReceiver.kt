@@ -14,9 +14,9 @@ class HabitResetingAlarmReceiver : BroadcastReceiver() {
 
             val workManager = WorkManager.getInstance(context)
             workManager.enqueueUniqueWork(
-                UpdatingHabitWorker.UPDATING_WORKER_TAG,
+                ResetingHabitWorker.UPDATING_WORKER_TAG,
                 ExistingWorkPolicy.KEEP,
-                UpdatingHabitWorker.createWorkRequest(Data.EMPTY)
+                ResetingHabitWorker.createWorkRequest(Data.EMPTY)
             )
 
         }
