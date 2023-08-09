@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 class HabitsBackgroundWorkImpl @Inject constructor() : HabitsBackgroundWork {
 
-
     override suspend fun startHabitsWorkManager(activity: Activity) {
         val currentTime = Calendar.getInstance()
         val targetTime = Calendar.getInstance().apply {
