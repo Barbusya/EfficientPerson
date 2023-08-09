@@ -2,7 +2,6 @@ package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.recyclerview.widget.ListAdapter
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem

@@ -15,8 +15,8 @@ class HabitRepositoryImpl @Inject constructor(
         habitListDao.addHabitItem(mapper.mapEntityToDbModel(habitItem))
     }
 
-    override suspend fun deleteHabitItem(habitItem: HabitItem) {
-        habitListDao.deleteHabitItem(habitItem.id)
+    override suspend fun deleteHabitItem(habitItemId: Long) {
+        habitListDao.deleteHabitItem(habitItemId)
     }
 
     override suspend fun editHabitItem(habitItem: HabitItem) {

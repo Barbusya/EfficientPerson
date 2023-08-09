@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 class HabitListViewModel @Inject constructor(
     private val getHabitListUseCase: GetHabitListUseCase,
-    private val deleteHabitListUseCase: DeleteHabitItemUseCase,
+    private val deleteHabitItemUseCase: DeleteHabitItemUseCase,
     private val editHabitItemUseCase: EditHabitItemUseCase,
     private val setUpdatingHabitsByDoneUseCase: SetUpdatingHabitsByDoneUseCase,
 ) : ViewModel() {
@@ -28,7 +28,7 @@ class HabitListViewModel @Inject constructor(
 
     fun deleteHabitItem(habitItem: HabitItem) {
         viewModelScope.launch {
-            deleteHabitListUseCase.deleteHabitItem(habitItem)
+            deleteHabitItemUseCase.deleteHabitItem(habitItem.id)
         }
     }
 
@@ -46,4 +46,5 @@ class HabitListViewModel @Inject constructor(
             setUpdatingHabitsByDoneUseCase.startHabitsWorkManager(activity)
         }
     }
+
 }

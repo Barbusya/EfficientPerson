@@ -21,30 +21,28 @@ class HabitsWorker(
     private val habitDatabase: HabitDatabase.Companion,
 ) : CoroutineWorker(context, workerParameters) {
 
-
     private val dao = habitDatabase.getInstance(context.applicationContext).habitListDao()
     override suspend fun doWork(): Result {
 
         try {
-
             Log.d("HabitsWorker", "doWork")
+            val notificationManager = getSystemService(
+                context,
+                NotificationManager::class.java
+            ) as NotificationManager
+
+            createNotificationChannel(notificationManager)
+
+            val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentTitle("Habits")
+                .setContentText("Habits refreshed")
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .build()
+
+            notificationManager.notify(NOTIFICATION_ID, notification)
+
             dao.getHabitList()
                 .collect {
-                    val notificationManager = getSystemService(
-                        context,
-                        NotificationManager::class.java
-                    ) as NotificationManager
-
-                    createNotificationChannel(notificationManager)
-
-                    val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-                        .setContentTitle("Habits")
-                        .setContentText("Habits refreshed")
-                        .setSmallIcon(R.drawable.ic_launcher_background)
-                        .build()
-
-                    notificationManager.notify(NOTIFICATION_ID, notification)
-
                     for (item in it) {
                         val newItem = item.copy(
                             isDone = false,
@@ -53,7 +51,7 @@ class HabitsWorker(
                         Log.d("HabitsWorker", "$habitItem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
                     }
-                    cancelWork(context)
+                    notificationManager.cancel(NOTIFICATION_ID)
                 }
             return Result.success()
 
