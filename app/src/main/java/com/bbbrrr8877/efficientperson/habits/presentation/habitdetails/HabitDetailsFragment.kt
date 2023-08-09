@@ -108,11 +108,13 @@ class HabitDetailsFragment : Fragment() {
     private fun launchEditMode() {
         viewModel.getHabitItem(habitItemId)
         viewModel.habitItem.observe(viewLifecycleOwner) {
+            val habitItem = it
             with(binding) {
                 etTitle.setText(it.title)
                 etDescription.setText(it.description)
                 cbPassedOrNot.isChecked = it.isDone
                 cbPassedOrNot.setOnClickListener {
+                    viewModel.setUpdatingHabitsByDone(requireActivity())
                     if (binding.cbPassedOrNot.isChecked) {
                         binding.tvPassedOrNot.setText(R.string.passed)
                     } else {
@@ -145,6 +147,10 @@ class HabitDetailsFragment : Fragment() {
                         R.string.not_passed
                     }
                 )
+                buttonDeleteHabit.setOnClickListener {
+                    viewModel.deleteHabitItem(habitItem)
+                    backToList()
+                }
             }
 
         }
@@ -154,6 +160,9 @@ class HabitDetailsFragment : Fragment() {
                 binding.etDescription.text?.toString(),
                 binding.cbPassedOrNot.isChecked
             )
+        }
+        binding.buttonDeleteHabit.setOnClickListener {
+
         }
     }
 
@@ -186,7 +195,11 @@ class HabitDetailsFragment : Fragment() {
                     )
                 }
             }
+            buttonDeleteHabit.setOnClickListener {
+                backToList()
+            }
         }
+
 
         binding.saveButton.setOnClickListener {
             viewModel.addHabitItem(
@@ -245,3 +258,4 @@ class HabitDetailsFragment : Fragment() {
         }
     }
 }
+

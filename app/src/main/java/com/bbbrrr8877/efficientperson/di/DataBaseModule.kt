@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-interface DataModule {
+interface DataBaseModule {
 
     @ApplicationScope
     @Binds
