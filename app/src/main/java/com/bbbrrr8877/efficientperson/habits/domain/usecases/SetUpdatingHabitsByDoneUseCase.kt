@@ -1,7 +1,7 @@
 package com.bbbrrr8877.efficientperson.habits.domain.usecases
 
 import android.app.Activity
-import com.bbbrrr8877.efficientperson.habits.domain.repositories.SetBackgroundWork
+import com.bbbrrr8877.efficientperson.habits.domain.repositories.HabitsBackgroundWork
 import javax.inject.Inject
 
 /**
@@ -9,10 +9,10 @@ import javax.inject.Inject
  */
 
 class SetUpdatingHabitsByDoneUseCase @Inject constructor(
-    private val setBackgroundWork: SetBackgroundWork
+    private val habitsBackgroundWork: HabitsBackgroundWork
 ) {
 
-    suspend fun startAlarmManager(activity: Activity) {
-        setBackgroundWork.startAlarmManager(activity)
+    suspend fun startHabitsWorkManager(activity: Activity) {
+        habitsBackgroundWork.startHabitsWorkManager(activity)
     }
 }

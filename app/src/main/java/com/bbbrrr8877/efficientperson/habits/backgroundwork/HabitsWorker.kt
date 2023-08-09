@@ -7,11 +7,16 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.work.*
+import androidx.work.CoroutineWorker
+import androidx.work.OneTimeWorkRequest
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
+import androidx.work.WorkerParameters
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.habits.data.room.HabitDatabase
+import java.util.concurrent.TimeUnit
 
-class HabitWorker(
+class HabitsWorker(
     private val context: Context,
     private val workerParameters: WorkerParameters,
     private val habitDatabase: HabitDatabase.Companion,
@@ -21,8 +26,9 @@ class HabitWorker(
     private val dao = habitDatabase.getInstance(context.applicationContext).habitListDao()
     override suspend fun doWork(): Result {
 
-
         try {
+
+            Log.d("HabitsWorker", "doWork")
             dao.getHabitList()
                 .collect {
                     val notificationManager = getSystemService(
@@ -45,7 +51,7 @@ class HabitWorker(
                             isDone = false,
                         )
                         val habitItem = dao.addHabitItem(newItem)
-                        Log.d("SimpleWorker", habitItem.toString())
+                        Log.d("HabitsWorker", "$habitItem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
                     }
                     cancelWork(context)
@@ -53,7 +59,7 @@ class HabitWorker(
             return Result.success()
 
         } catch (e: Exception) {
-            Log.e("SimpleWorker", "Error updating habits", e)
+            Log.e("HabitsWorker", "Error updating habits", e)
             return Result.failure()
         } finally {
             val notificationManager = getSystemService(
@@ -80,20 +86,22 @@ class HabitWorker(
         private const val CHANNEL_ID = "channel_id"
         private const val CHANNEL_NAME = "channel_name"
         private const val NOTIFICATION_ID = 1
-        const val SIMPLE_WORKER_TAG = "SimpleWorkerTag"
+        const val HABITS_WORKER_TAG = "HabitsWorkerTag"
 
-        fun createWorkRequest(data: Data): OneTimeWorkRequest {
-            return OneTimeWorkRequest.Builder(HabitWorker::class.java)
-                .setInputData(data)
-                .addTag(SIMPLE_WORKER_TAG)
+        fun createWorkRequest(timeDiff: Long): PeriodicWorkRequest {
+            Log.d("HabitsWorker", "$timeDiff")
+            return PeriodicWorkRequest.Builder(HabitsWorker::class.java, 1, TimeUnit.DAYS)
+                .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
+                .addTag(HABITS_WORKER_TAG)
                 .build()
         }
 
         fun cancelWork(context: Context) {
-            WorkManager.getInstance(context).cancelAllWorkByTag(SIMPLE_WORKER_TAG)
+            WorkManager.getInstance(context).cancelAllWorkByTag(HABITS_WORKER_TAG)
         }
     }
 }
 
+//TODO Set WorkManager work time
 //TODO DI of WorkManager
 //TODO Notification Text, Title and Icon

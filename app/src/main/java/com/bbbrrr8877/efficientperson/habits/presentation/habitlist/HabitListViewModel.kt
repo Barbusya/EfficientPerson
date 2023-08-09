@@ -43,7 +43,7 @@ class HabitListViewModel @Inject constructor(
 
     fun setUpdatingHabitsByDone(activity: Activity) {
         viewModelScope.launch {
-            setUpdatingHabitsByDoneUseCase.startAlarmManager(activity)
+            setUpdatingHabitsByDoneUseCase.startHabitsWorkManager(activity)
         }
     }
 }

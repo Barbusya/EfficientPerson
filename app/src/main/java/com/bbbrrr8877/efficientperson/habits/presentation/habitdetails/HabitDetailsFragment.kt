@@ -1,7 +1,5 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitdetails
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -10,17 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.isGone
-import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bbbrrr8877.efficientperson.App
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitDetailsBinding
-import com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitAlarmReceiver
 import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.presentation.ViewModelFactory
-import java.util.*
 import javax.inject.Inject
 
 class HabitDetailsFragment : Fragment() {
