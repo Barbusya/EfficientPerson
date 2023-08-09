@@ -1,11 +1,8 @@
 package com.bbbrrr8877.efficientperson.habits.presentation.habitlist
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Context.ALARM_SERVICE
-import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,12 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bbbrrr8877.efficientperson.App
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.databinding.FragmentHabitListBinding
-import com.bbbrrr8877.efficientperson.habits.backgroundwork.HabitAlarmReceiver
 import com.bbbrrr8877.efficientperson.habits.presentation.ViewModelFactory
 import com.bbbrrr8877.efficientperson.habits.presentation.habitdetails.HabitDetailsFragment
-import java.util.*
 import javax.inject.Inject
-import kotlin.concurrent.thread
 
 class HabitListFragment : Fragment() {
 

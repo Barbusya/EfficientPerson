@@ -11,4 +11,5 @@ data class HabitItemDBModel(
     val description: String,
     val isGood: Boolean,
     val isDone: Boolean,
+    val deleteTime: Long,
 )

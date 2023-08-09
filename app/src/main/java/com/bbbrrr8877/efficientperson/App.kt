@@ -6,7 +6,6 @@ import androidx.work.DelegatingWorkerFactory
 import com.bbbrrr8877.efficientperson.di.DaggerApplicationComponent
 import com.bbbrrr8877.efficientperson.habits.backgroundwork.MyWorkerFactory
 import com.bbbrrr8877.efficientperson.habits.data.room.HabitDatabase
-import com.bbbrrr8877.efficientperson.habits.data.room.HabitListMapper
 
 class App : Application(), Configuration.Provider {
 

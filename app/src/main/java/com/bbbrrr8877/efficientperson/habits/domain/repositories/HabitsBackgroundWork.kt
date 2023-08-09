@@ -2,7 +2,7 @@ package com.bbbrrr8877.efficientperson.habits.domain.repositories
 
 import android.app.Activity
 
-interface SetBackgroundWork {
+interface HabitsBackgroundWork {
 
-    suspend fun startAlarmManager(activity: Activity)
+    suspend fun startHabitsWorkManager(activity: Activity)
 }
