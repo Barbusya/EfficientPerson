@@ -49,5 +49,7 @@ Behaviour
 
  Tasks:
  + Сдулать градиент айтемов на ресайклере
- - Сделать айтемы поменьше
+ + Сделать айтемы поменьше
+ + Set WorkManager work time
+ + DI of WorkManager
  */
