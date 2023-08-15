@@ -4,7 +4,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.CoroutineWorker
@@ -27,7 +26,6 @@ class HabitsWorker(
 
         try {
 
-            Log.d("HabitsWorker", "doWork")
             dao.getHabitList()
                 .collect {
                     val notificationManager = getSystemService(
@@ -50,7 +48,6 @@ class HabitsWorker(
                             isDone = false,
                         )
                         val habitItem = dao.addHabitItem(newItem)
-                        Log.d("HabitsWorker", "$habitItem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
                     }
                     cancelWork(context)
@@ -58,7 +55,6 @@ class HabitsWorker(
             return Result.success()
 
         } catch (e: Exception) {
-            Log.e("HabitsWorker", "Error updating habits", e)
             return Result.failure()
         } finally {
             val notificationManager = getSystemService(
@@ -88,7 +84,6 @@ class HabitsWorker(
         const val HABITS_WORKER_TAG = "HabitsWorkerTag"
 
         fun createWorkRequest(timeDiff: Long): PeriodicWorkRequest {
-            Log.d("HabitsWorker", "$timeDiff")
             return PeriodicWorkRequest.Builder(HabitsWorker::class.java, 1, TimeUnit.DAYS)
                 .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
                 .addTag(HABITS_WORKER_TAG)
