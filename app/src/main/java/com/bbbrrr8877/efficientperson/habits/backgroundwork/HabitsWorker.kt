@@ -98,7 +98,4 @@ class HabitsWorker(
         }
     }
 }
-
-//TODO Set WorkManager work time
-//TODO DI of WorkManager
 //TODO Notification Text, Title and Icon
