@@ -59,7 +59,8 @@ class HabitDetailsViewModel @Inject constructor(
                     description = description,
                     isGood = inputQuality,
                     isDone = inputProgress,
-                    deleteTime = 0L
+                    deleteTime = 0L,
+                    isDeleted = false
                 )
                 addHabitListUseCase.addHabitItem(habitItem)
                 finishWork()

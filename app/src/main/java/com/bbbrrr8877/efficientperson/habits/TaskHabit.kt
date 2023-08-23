@@ -3,8 +3,8 @@ package com.bbbrrr8877.efficientperson.habits
 /**
 
 General logic:
-+ Создание привычки
-- Изменение положения привычки для расставления пользователем приоритета
++ Create habit
+- Change position of items for user prioritization
 + Поле isDone (привычка выполнена) сбрасывается на false раз в сутки в 00:00. (WorkManager)
 - При удалении привычки у привычки запускаетсятаймер на 5 дней, что бы пользователь мог одуматься
 - Есть возможность восстановления привычки, если таймер еще тикает
@@ -52,4 +52,7 @@ Behaviour
  + Сделать айтемы поменьше
  + Set WorkManager work time
  + DI of WorkManager
+ - Optimize recycler view (delegate adapter)
+ - Deleting timer 5 days
+ - Restore deleted items
  */

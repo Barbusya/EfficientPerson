@@ -11,7 +11,8 @@ class HabitListMapper @Inject constructor() {
         description = habitItem.description,
         isGood = habitItem.isGood,
         isDone = habitItem.isDone,
-        deleteTime = habitItem.deleteTime
+        deleteTime = habitItem.deleteTime,
+        isDeleted = false,
     )
 
     fun mapDbModelToEntity(habitItemDBModel: HabitItemDBModel) = HabitItem(
@@ -20,7 +21,8 @@ class HabitListMapper @Inject constructor() {
         description = habitItemDBModel.description,
         isGood = habitItemDBModel.isGood,
         isDone = habitItemDBModel.isDone,
-        deleteTime = habitItemDBModel.deleteTime
+        deleteTime = habitItemDBModel.deleteTime,
+        isDeleted = habitItemDBModel.isDeleted
     )
 
     fun mapListDBModelToListEntity(list: List<HabitItemDBModel>) = list.map {

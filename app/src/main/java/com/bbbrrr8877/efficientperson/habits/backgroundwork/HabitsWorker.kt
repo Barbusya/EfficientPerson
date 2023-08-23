@@ -4,16 +4,17 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.CoroutineWorker
+import androidx.work.ListenableWorker
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.bbbrrr8877.efficientperson.R
 import com.bbbrrr8877.efficientperson.habits.data.room.HabitDatabase
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class HabitsWorker(
     private val context: Context,
@@ -25,7 +26,6 @@ class HabitsWorker(
     override suspend fun doWork(): Result {
 
         try {
-            Log.d("HabitsWorker", "doWork")
             val notificationManager = getSystemService(
                 context,
                 NotificationManager::class.java
@@ -48,7 +48,6 @@ class HabitsWorker(
                             isDone = false,
                         )
                         val habitItem = dao.addHabitItem(newItem)
-                        Log.d("HabitsWorker", "$habitItem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
                     }
                     notificationManager.cancel(NOTIFICATION_ID)
@@ -56,7 +55,6 @@ class HabitsWorker(
             return Result.success()
 
         } catch (e: Exception) {
-            Log.e("HabitsWorker", "Error updating habits", e)
             return Result.failure()
         } finally {
             val notificationManager = getSystemService(
@@ -86,7 +84,6 @@ class HabitsWorker(
         const val HABITS_WORKER_TAG = "HabitsWorkerTag"
 
         fun createWorkRequest(timeDiff: Long): PeriodicWorkRequest {
-            Log.d("HabitsWorker", "$timeDiff")
             return PeriodicWorkRequest.Builder(HabitsWorker::class.java, 1, TimeUnit.DAYS)
                 .setInitialDelay(timeDiff, TimeUnit.MILLISECONDS)
                 .addTag(HABITS_WORKER_TAG)
@@ -95,6 +92,19 @@ class HabitsWorker(
 
         fun cancelWork(context: Context) {
             WorkManager.getInstance(context).cancelAllWorkByTag(HABITS_WORKER_TAG)
+        }
+    }
+
+    class Factory @Inject constructor(
+        private val habitDatabase: HabitDatabase.Companion,
+    ) : ChildWorkerFactory {
+        override fun create(
+            context: Context,
+            workerParameters: WorkerParameters
+        ): ListenableWorker {
+            return HabitsWorker(
+                context, workerParameters, habitDatabase
+            )
         }
     }
 }

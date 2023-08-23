@@ -4,12 +4,15 @@ import com.bbbrrr8877.efficientperson.habits.domain.Etities.HabitItem
 import com.bbbrrr8877.efficientperson.habits.domain.repositories.HabitRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.sync.Mutex
 import javax.inject.Inject
 
 class HabitRepositoryImpl @Inject constructor(
     private val habitListDao: HabitListDao,
     private val mapper: HabitListMapper
 ) : HabitRepository {
+
+    private val mutex = Mutex()
 
     override suspend fun addHabitItem(habitItem: HabitItem) {
         habitListDao.addHabitItem(mapper.mapEntityToDbModel(habitItem))
