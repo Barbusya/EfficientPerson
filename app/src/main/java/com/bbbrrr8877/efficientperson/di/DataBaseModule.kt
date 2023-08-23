@@ -25,5 +25,11 @@ interface DataBaseModule {
         ): HabitListDao {
             return HabitDatabase.getInstance(application).habitListDao()
         }
+
+        @ApplicationScope
+        @Provides
+        fun provideHabitsDataBase(): HabitDatabase.Companion {
+            return HabitDatabase.Companion
+        }
     }
 }
